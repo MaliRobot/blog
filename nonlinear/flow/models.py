@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
-from datetime import datetime
+from tagging.registry import register
 
 # Create your models here.
 class Image(models.Model):
@@ -40,6 +40,7 @@ class Order(models.Model):
     package = models.TextField()
     date_ordered = models.DateTimeField('date ordered', blank=False)
 
+register(Post)
 
 
 
