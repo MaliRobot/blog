@@ -26,7 +26,7 @@ SECRET_KEY = 'dg6=^no0f@%^=_0so)5c4k65s^@^0+2%0m_63wt==38&ay*#)x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['malirobot.pythonanywhere.com']
 
 
 # Application definition
