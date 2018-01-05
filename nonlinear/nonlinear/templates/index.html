@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Hi there</h1>
+
+{% if news %}
+    <ul>
+    {% for news_item in news %}
+        <li>
+            <h1>{{ news_item.title }}</h1>
+            <p>{{ news_item.text }}</p>
+            <img src="{% static news_item.image.url %}" />
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
