@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from tagging.registry import register
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Image(models.Model):
@@ -11,7 +12,7 @@ class Image(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
-    text = models.TextField()
+    text = RichTextField()
     author = models.OneToOneField(User)
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
