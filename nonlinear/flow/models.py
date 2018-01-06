@@ -6,7 +6,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Image(models.Model):
     name = models.CharField(max_length=255)
-    file = models.ImageField(upload_to= 'flow/static/images/')
+    file = models.ImageField(upload_to= 'static/images/')
     def __str__(self):
         return self.name
 
@@ -34,10 +34,10 @@ class Comment(models.Model):
 
 class News(models.Model):
     title = models.CharField(max_length=255)
-    text = models.TextField()
+    text = RichTextField()
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
-    image = models.ImageField(upload_to= 'flow/static/images/', default=None)
+    image = models.ImageField(upload_to= 'static/images/', default=None)
     date_published = models.DateTimeField('date published')
     class Meta:
         verbose_name_plural = "news"
