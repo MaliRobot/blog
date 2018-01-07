@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Contact form</h1>
+    {% if submitted %}
+        <p>Thanks, we'll get in touch if required.</p>
+    {% else %}
+        <form action="/contact/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" />
+        </form>
+    {% endif %}
+{% endblock %}

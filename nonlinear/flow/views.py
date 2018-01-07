@@ -1,6 +1,9 @@
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.template import loader
 from .models import News, Post, Album
+from .forms import ContactForm
 
 # Create your views here.
 def index(request):
@@ -19,10 +22,19 @@ def blog(request):
     }
     return HttpResponse(template.render(context, request))
 
-def albums(request):
+def releases(request):
     albums = Album.objects.order_by('-release_date')
     template = loader.get_template('releases.html')
     context = {
         'albums': albums,
     }
     return HttpResponse(template.render(context, request))
+
+def contact_form(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            return render(request, 'contact.html', {'form': None, 'submitted': True})
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form, 'submitted': False})
