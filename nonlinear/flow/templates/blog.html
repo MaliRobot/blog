@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Blog</h1>
-{% for post in posts %}
+{% for post in blog_posts %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.lead | safe }}</p>
     <p>{{ post.text | safe }}</p>

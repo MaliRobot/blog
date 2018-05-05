@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Blog</h1>
+{% for post in blog_posts %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.lead | safe }}</p>
+    <p>{{ post.text | safe }}</p>
+    <p>{{ post.author | safe }}</p>
+    <p>{{ post.date_published | safe }}</p>
+    {% for image in post.images %}
+        <img src="{{ image.image.url }}" />
+    {% endfor %}
+{% endfor %}
+{% endblock %}
