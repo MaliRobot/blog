@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from tagging.registry import register
 from ckeditor.fields import RichTextField
 
 # Create your models here.
@@ -18,7 +17,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
     text = RichTextField()
-    author = models.OneToOneField(User)
+    author = models.OneToOneField(User, on_delete="")
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
     images = models.ForeignKey(Image, on_delete=models.CASCADE)
@@ -34,7 +33,7 @@ class Comment(models.Model):
     author = models.CharField(max_length=255)
     public = models.BooleanField(default=True)
     date_posted = models.DateTimeField('date posted', blank=False)
-    post = models.ForeignKey(Post, related_name='comments')
+    post = models.ForeignKey(Post, related_name='comments', on_delete="")
 
     def __str__(self):
         return self.title
@@ -77,7 +76,6 @@ class Order(models.Model):
         return self.name
 
 
-register(Post)
 
 
 
