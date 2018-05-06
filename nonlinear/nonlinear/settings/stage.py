@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['malirobot.pythonanywhere.com']
 
+INTERNAL_IPS = ()
 
 # Application definition
 
