@@ -13,22 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.contrib import admin
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import path
+from flow import views as flew
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', include('flow.urls')),
-    url(r'^blog/', include('flow.urls')),
-    url(r'^releases', include('flow.urls')),
-    url(r'^contact/', include('flow.urls')),
-    url(r'^flow/', include('flow.urls')),
+    path('admin', admin.site.urls),
+    path('blog', flew.blog),
+    path('releases', flew.releases),
+    path('contact', flew.contact_form),
+    path('', flew.index),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        path(r'^__debug__/', include(debug_toolbar.urls)),
     ]

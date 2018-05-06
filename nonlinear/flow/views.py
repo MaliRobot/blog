@@ -5,7 +5,7 @@ from django.template import loader
 from .models import News, Post, Album
 from .forms import ContactForm
 
-# Create your views here.
+
 def index(request):
     news = News.objects.order_by('-date_published')[:5]
     template = loader.get_template('index.html')
@@ -13,6 +13,7 @@ def index(request):
         'news': news,
     }
     return HttpResponse(template.render(context, request))
+
 
 def blog(request):
     blog_posts = Post.objects.order_by('-date_published')[:5]
@@ -22,6 +23,7 @@ def blog(request):
     }
     return HttpResponse(template.render(context, request))
 
+
 def releases(request):
     albums = Album.objects.order_by('-release_date')
     template = loader.get_template('releases.html')
@@ -29,6 +31,7 @@ def releases(request):
         'albums': albums,
     }
     return HttpResponse(template.render(context, request))
+
 
 def contact_form(request):
     if request.method == 'POST':
