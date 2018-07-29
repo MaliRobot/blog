@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 
 class Image(models.Model):
     name = models.CharField(max_length=255)
-    file = models.ImageField(upload_to='static/images/')
+    file = models.ImageField()
 
     def __str__(self):
         return self.name
