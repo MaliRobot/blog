@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
+from django.shortcuts import render, get_object_or_404
 from .models import News, Post, Album
 from .forms import ContactForm
 
@@ -22,6 +23,11 @@ def blog(request):
         'blog_posts': blog_posts,
     }
     return HttpResponse(template.render(context, request))
+
+
+def single_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'single_post.html', {'post': post})
 
 
 def releases(request):
