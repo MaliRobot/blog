@@ -3,6 +3,8 @@
     {% for news_article in news %}
         <h1>{{ news_article.title }}</h1>
         <p>{{ news_article.text | safe }}</p>
-        <img src="{{ news_article.image.url }}" />
+        <div class="img-wrapper">
+            <img class="blog-image" src="{{ news_article.image.url }}" />
+        </div>
     {% endfor %}
 {% endblock %}

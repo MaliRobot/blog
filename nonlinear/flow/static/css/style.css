@@ -1,16 +1,27 @@
-@import url('../fonts/Archivo-Regular.ttf');
+@font-face {
+    font-family: Archivo;
+    src: url('../fonts/Archivo-Regular.ttf');
+}
 
-@import url('../fonts/Roboto-Regular.ttf');
+@font-face {
+    font-family: Roboto;
+    src: url('../fonts/Roboto-Regular.ttf');
+}
 
 h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Archivo', sans-serif;
 }
 
 p {
-    font-family: 'Archivo', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 header,
 footer {
     text-align: center;
 }
+
+.blog-image {
+    max-width: 100%;
+}
+
