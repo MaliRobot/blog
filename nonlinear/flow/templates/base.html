@@ -5,12 +5,20 @@
         <title>Title</title>
 
         {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap-grid.min.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
 
     </head>
     <body>
-    <!--<img src="/static/images/download.jpg"/>-->
-        {% block content %}
-        {% endblock %}
+        {% include 'header.html' %}
+        <main>
+            <div class="container">
+                <div class="row">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </main>
+        {% include 'footer.html' %}
     </body>
 </html>

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Hi there</h1>
     {% for news_article in news %}
         <h1>{{ news_article.title }}</h1>
         <p>{{ news_article.text | safe }}</p>
