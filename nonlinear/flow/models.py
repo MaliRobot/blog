@@ -44,7 +44,7 @@ class News(models.Model):
     text = RichTextField()
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
-    image = models.ImageField(upload_to= 'static/images/', default=None)
+    image = models.ImageField(upload_to='static/images/', blank=True, default=None)
     date_published = models.DateTimeField('date published')
 
     class Meta:

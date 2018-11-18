@@ -1,10 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
     {% for news_article in news %}
+    <div class="news">
         <h1>{{ news_article.title }}</h1>
-        <p>{{ news_article.text | safe }}</p>
         <div class="img-wrapper">
-            <img class="blog-image" src="{{ news_article.image.url }}" />
+            {% if news_article.image %}
+            <img class="blog-image" src="{{ news_article.image.url }}" align=left />
+            {% endif %}
         </div>
+        <p>{{ news_article.text | safe }}</p>
+    </div>
     {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if news.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ news.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ news.number }} of {{ news.paginator.num_pages }}.
+            </span>
+
+            {% if news.has_next %}
+                <a href="?page={{ news.next_page_number }}">next</a>
+                <a href="?page={{ news.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
