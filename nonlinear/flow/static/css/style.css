@@ -12,13 +12,38 @@ h1 {
     font-family: 'Archivo', sans-serif;
 }
 
-p {
+p, a {
     font-family: 'Roboto', sans-serif;
 }
 
 header,
 footer {
     text-align: center;
+}
+
+#menu {
+    display: -webkit-box;
+    position: absolute;
+    top: 10em;
+    background: white;
+    right: -12em;
+    transition: 1s ease-in-out;
+}
+
+#menu:hover {
+    right: 0;
+}
+
+#menu-title {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    background: white;
+    font-family: 'Roboto', sans-serif;
+    right: -2em;
+}
+
+#news, #blog {
+    width: 100%;
 }
 
 .blog-image {

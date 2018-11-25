@@ -7,7 +7,7 @@
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap-grid.min.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
-
+        <script type="application/javascript" href="{% static '/js/functions.js' %}"></script>
     </head>
     <body>
         {% include 'header.html' %}
@@ -19,6 +19,7 @@
                 </div>
             </div>
         </main>
+        {% include 'sidebar.html' %}
         {% include 'footer.html' %}
     </body>
 </html>

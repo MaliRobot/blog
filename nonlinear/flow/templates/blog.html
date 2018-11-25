@@ -1,12 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Blog</h1>
-{% for post in blog_posts %}
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.lead | safe }}</p>
-    <p>{{ post.text | safe }}</p>
-    <p>{{ post.author | safe }}</p>
-    <p>{{ post.date_published | safe }}</p>
-{% endfor %}
+    <div id="blog">
+        {% for post in blog_posts %}
+        <div class="posts">
+            <h1>{{ post.title }}</h1>
+            <div>
+                <p class="blog-time">{{ post.date_published | date:'H:i d-m-Y '}}</p>
+                <p class="blog-author">{{ post.author }}</p>
+            </div>
+            <div class="img-wrapper">
+                {% if post.image %}
+                <img class="blog-image" src="{{ post.image.url }}" align=left />
+                {% endif %}
+            </div>
+            <p class="blog-text">{{ post.text | safe }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if post.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ news.previous_page_number }}">previous</a>
+            {% endif %}
+
+            {% if post.has_previous or post.has_next %}
+            <span class="current">
+                Page {{ post.number }} of {{ post.paginator.num_pages }}.
+            </span>
+            {% endif %}
+
+            {% if post.has_next %}
+                <a href="?page={{ news.next_page_number }}">next</a>
+                <a href="?page={{ news.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}

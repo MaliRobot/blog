@@ -9,7 +9,7 @@ from .forms import ContactForm
 
 
 def index(request):
-    news_articles = News.objects.order_by('-date_published')[:5]
+    news_articles = News.objects.filter(public=True).order_by('-date_published')[:5]
     page = request.GET.get('page', 1)
     paginator = Paginator(news_articles, 5)
     template = loader.get_template('index.html')
@@ -23,7 +23,7 @@ def index(request):
 
 
 def blog(request):
-    posts = Post.objects.order_by('-date_published')[:5]
+    posts = Post.objects.filter(public=True).order_by('-date_published')[:5]
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)
     blog_posts = paginator.page(page)
@@ -35,7 +35,7 @@ def blog(request):
 
 
 def single_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, public=True, pk=pk)
     return render(request, 'single_post.html', {'post': post})
 
 

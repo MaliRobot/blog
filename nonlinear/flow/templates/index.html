@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for news_article in news %}
-    <div class="news">
-        <h1>{{ news_article.title }}</h1>
-        <div class="img-wrapper">
-            {% if news_article.image %}
-            <img class="blog-image" src="{{ news_article.image.url }}" align=left />
-            {% endif %}
+    <div id="news">
+        {% for news_article in news %}
+        <div class="news">
+            <h1>{{ news_article.title }}</h1>
+            <div>
+                <p class="blog-time">{{ news_article.date_published | date:'H:i d-m-Y '}}</p>
+            </div>
+            <div class="img-wrapper">
+                {% if news_article.image %}
+                <img class="blog-image" src="{{ news_article.image.url }}" align=left />
+                {% endif %}
+            </div>
+            <p class="blog-text">{{ news_article.text | safe }}</p>
         </div>
-        <p>{{ news_article.text | safe }}</p>
+        {% endfor %}
     </div>
-    {% endfor %}
     <div class="pagination">
         <span class="step-links">
             {% if news.has_previous %}
@@ -18,9 +23,11 @@
                 <a href="?page={{ news.previous_page_number }}">previous</a>
             {% endif %}
 
+            {% if news.has_previous or news.has_next %}
             <span class="current">
                 Page {{ news.number }} of {{ news.paginator.num_pages }}.
             </span>
+            {% endif %}
 
             {% if news.has_next %}
                 <a href="?page={{ news.next_page_number }}">next</a>
