@@ -21,8 +21,19 @@ footer {
     text-align: center;
 }
 
+.container-fluid {
+    max-width: 1700px !important;
+}
+
 .main-title {
     font-size: 8em;
+}
+
+.break {
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /*sidemenu*/
