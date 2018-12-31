@@ -56,3 +56,8 @@ def contact_form(request):
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form, 'submitted': False})
+
+
+def about_page(request):
+    template = loader.get_template('about.html')
+    return render(request, 'about.html')

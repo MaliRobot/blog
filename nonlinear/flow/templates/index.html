@@ -1,20 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-    <div id="news">
-        {% for news_article in news %}
-        <div class="news">
-            <h1>{{ news_article.title }}</h1>
-            <div>
-                <p class="blog-time">{{ news_article.date_published | date:'H:i d-m-Y '}}</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9" id="news">
+                {% for news_article in news %}
+                <div class="news">
+                    <h2>{{ news_article.title }}</h2>
+                    <div>
+                        <p class="blog-time">{{ news_article.date_published | date:'H:i d-m-Y '}}</p>
+                    </div>
+                    <div class="img-wrapper">
+                        {% if news_article.image %}
+                        <img class="blog-image" src="{{ news_article.image.url }}" align=left />
+                        {% endif %}
+                    </div>
+                    <p class="blog-text">{{ news_article.text | safe }}</p>
+                </div>
+                {% endfor %}
             </div>
-            <div class="img-wrapper">
-                {% if news_article.image %}
-                <img class="blog-image" src="{{ news_article.image.url }}" align=left />
-                {% endif %}
+            <div class="col-3">
+                <h2>Latest blogposts</h2>
+                {% for post in posts %}
+                <h3><a class="blogpost-title-preview" href="/blog/{{ post.id }}">{{ post.title }}</a></h3>
+                {% endfor %}
             </div>
-            <p class="blog-text">{{ news_article.text | safe }}</p>
         </div>
-        {% endfor %}
     </div>
     <div class="pagination">
         <span class="step-links">

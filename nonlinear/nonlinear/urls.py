@@ -26,6 +26,7 @@ urlpatterns = [
     path('blog', flew.blog),
     path('releases', flew.releases),
     path('contact', flew.contact_form),
+    path('about', flew.about_page),
     path('', flew.index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

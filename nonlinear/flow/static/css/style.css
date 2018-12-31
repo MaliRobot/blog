@@ -8,7 +8,7 @@
     src: url('../fonts/Roboto-Regular.ttf');
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Archivo', sans-serif;
 }
 
@@ -21,13 +21,21 @@ footer {
     text-align: center;
 }
 
+.main-title {
+    font-size: 8em;
+}
+
+/*sidemenu*/
 #menu {
     display: -webkit-box;
     position: absolute;
     top: 10em;
-    background: white;
     right: -12em;
     transition: 1s ease-in-out;
+    color: white;
+    background-color: black;
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
 
 #menu:hover {
@@ -37,10 +45,26 @@ footer {
 #menu-title {
     writing-mode: vertical-rl;
     text-orientation: upright;
-    background: white;
     font-family: 'Roboto', sans-serif;
     right: -2em;
 }
+
+.nav-link {
+    color: white;
+    background-color: black;
+}
+
+.nav-link,
+.nav-link:hover {
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.nav-link:hover {
+    color: black;
+    background-color: white;
+}
+/*end sidemenu*/
 
 #news, #blog {
     width: 100%;
@@ -50,5 +74,10 @@ footer {
     max-width: 100%;
     padding-right: 1em;
     padding-bottom: 1em;
+}
+
+.blogpost-title-preview {
+    text-decoration: none;
+    color: black;
 }
 
