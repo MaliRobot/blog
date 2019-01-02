@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
-from .models import News, Post, Album
+from .models import News, Post, Album, Poem
 from .forms import ContactForm
 
 
@@ -30,6 +30,15 @@ def blog(request):
     template = loader.get_template('blog.html')
     context = {
         'blog_posts': blog_posts,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def poems(request):
+    poems = Poem.objects.filter(public=True).order_by('-date_created')
+    template = loader.get_template('poems.html')
+    context = {
+        'poems': poems,
     }
     return HttpResponse(template.render(context, request))
 

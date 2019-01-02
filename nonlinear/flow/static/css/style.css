@@ -39,9 +39,9 @@ footer {
 /*sidemenu*/
 #menu {
     display: -webkit-box;
-    position: absolute;
+    position: fixed;
     top: 10em;
-    right: -12em;
+    right: -27.7em;
     transition: 1s ease-in-out;
     color: white;
     background-color: black;
@@ -50,7 +50,7 @@ footer {
 }
 
 #menu:hover {
-    right: 0;
+    right: -15em;
 }
 
 #menu-title {
@@ -58,11 +58,13 @@ footer {
     text-orientation: upright;
     font-family: 'Roboto', sans-serif;
     right: -2em;
+    padding-top: 1.25em;
 }
 
 .nav-link {
     color: white;
     background-color: black;
+    font-size: 2em;
 }
 
 .nav-link,
@@ -92,3 +94,20 @@ footer {
     color: black;
 }
 
+@media only screen and (max-width: 768px) {
+    /*sidemenu*/
+    #menu {
+        /*display: none;*/
+        display: contents;
+        position: inherit;
+    }
+
+    #menu-title {
+        display: none;
+    }
+
+    .nav-link {
+        padding: 8px;
+    }
+    /*end sidemenu*/
+}

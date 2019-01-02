@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('blog/<int:pk>/', flew.single_post),
     path('blog', flew.blog),
+    path('poetry', flew.poems),
     path('releases', flew.releases),
     path('contact', flew.contact_form),
     path('about', flew.about_page),
