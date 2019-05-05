@@ -82,7 +82,7 @@ class Poem(models.Model):
     text = models.TextField()
     public = models.BooleanField()
     author = models.OneToOneField(User, on_delete="", null=True)
-    date_created = models.DateTimeField(default=timezone.now(), blank=False)
+    date_created = models.DateTimeField(default=timezone.now, blank=False)
 
     def __str__(self):
         return self.title

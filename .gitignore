@@ -4,3 +4,4 @@ envnon/*
 *.jpg
 *.png
 nonlinear/nonlinear/settings.py
+.env
