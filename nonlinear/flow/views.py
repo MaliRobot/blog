@@ -67,6 +67,6 @@ def contact_form(request):
     return render(request, 'contact.html', {'form': form, 'submitted': False})
 
 
-def about_page(request):
+def about(request):
     template = loader.get_template('about.html')
     return render(request, 'about.html')

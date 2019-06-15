@@ -16,13 +16,18 @@
                     </div>
                     <p class="blog-text">{{ news_article.text | safe }}</p>
                 </div>
-                <div class="break">%!%&*</div>
+                <div class="break">%&*$#</div>
                 {% endfor %}
             </div>
             <div class="col-xs-12 col-sm-3">
                 <h2>Latest blogposts</h2>
                 {% for post in posts %}
-                <h3><a class="blogpost-title-preview" href="/blog/{{ post.id }}">{{ post.title }}</a></h3>
+                <div>
+                    <h3>
+                        <a class="blogpost-title-preview" href="/blog/{{ post.id }}">{{ post.title }}</a>
+                        <p class="blogpost-lead-preview">{{ post.lead }}</p>
+                    </h3>
+                </div>
                 {% endfor %}
             </div>
         </div>

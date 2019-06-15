@@ -1,6 +1,7 @@
 *.pyc
 .idea/*
 envnon/*
+venv/*
 *.jpg
 *.png
 .env
