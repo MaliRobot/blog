@@ -15,6 +15,12 @@
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Archivo', sans-serif;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    hyphens: auto;
 }
 
 p, a {
@@ -90,7 +96,7 @@ footer {
 }
 
 .blog-image {
-    max-width: 100%;
+    max-width: 50%;
     padding-right: 1em;
     padding-bottom: 1em;
 }
@@ -125,4 +131,18 @@ footer {
         padding: 8px;
     }
     /*end sidemenu*/
+}
+
+@media only screen and (max-width: 379px) {
+    #nav-link {
+        min-width: 46%;
+        line-height: 0em;
+        display: inline-block;
+        padding: 39px;
+        margin: 6px;
+    }
+
+    .blog-image {
+        max-width: 100%;
+    }
 }
