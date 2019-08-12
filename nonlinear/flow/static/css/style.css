@@ -52,13 +52,25 @@ footer {
     display: -webkit-box;
     position: fixed;
     top: 10em;
-    right: -27.7em;
+    right: -28rem;
     transition: 1s ease-in-out;
     color: white;
     background-color: black;
     padding-top: 2em;
     padding-bottom: 2em;
-    z-index: 100;
+    z-index: 1000;
+}
+
+@supports (-ms-ime-align:auto) {
+    #menu {
+        right: -26rem;
+    }
+}
+
+@-moz-document url-prefix() {
+    #menu {
+        right: -25rem;
+    }
 }
 
 #menu:hover {
