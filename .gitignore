@@ -6,3 +6,4 @@ venv/*
 *.png
 .env
 nonlinear/staticfiles/*
+node_modules/*
