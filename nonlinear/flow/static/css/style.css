@@ -109,7 +109,7 @@ footer {
 }
 
 .blog-image {
-    max-width: 50%;
+    max-width: 25%;
     padding-right: 1em;
     padding-bottom: 1em;
 }
@@ -145,6 +145,10 @@ footer {
         font-size: 1.5em;
     }
     /*end sidemenu*/
+
+    .blog-image {
+        max-width: 50%;
+    }
 }
 
 @media only screen and (max-width: 379px) {
