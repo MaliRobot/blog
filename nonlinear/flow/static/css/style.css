@@ -105,6 +105,7 @@ footer {
 
 #news, #blog {
     width: 100%;
+    display: inline-block;
 }
 
 .blog-image {
