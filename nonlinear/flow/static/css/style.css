@@ -69,7 +69,7 @@ footer {
 
 @-moz-document url-prefix() {
     #menu {
-        right: -23rem;
+        right: -24rem;
     }
 }
 
