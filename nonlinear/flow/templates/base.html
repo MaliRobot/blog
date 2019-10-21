@@ -7,9 +7,14 @@
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap-grid.min.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
-        <script type="application/javascript" href="{% static '/js/functions.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+        </script>
+        <script type="application/javascript" src="{% static '/JS/functions.js' %}"></script>
     </head>
     <body>
+         <a href="#" class="invisible_box"></a>
         {% include 'header.html' %}
         {% include 'sidebar.html' %}
         <main>

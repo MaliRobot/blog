@@ -36,6 +36,14 @@ footer {
     max-width: 1700px !important;
 }
 
+.invisible_box {
+    width: 10px;
+    height: 10px;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
 .main-title {
     font-size: 8em;
 }

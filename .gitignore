@@ -1,7 +1,16 @@
 *.pyc
+
+# pycharm
 .idea/*
-envnon/*
-venv/*
+
+# images
 *.jpg
 *.png
+
+# env and virtual env
+envnon/*
+venv/*
 .env
+
+# static files
+nonlinear/staticfiles/*
