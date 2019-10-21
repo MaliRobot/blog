@@ -60,13 +60,25 @@ footer {
     display: -webkit-box;
     position: fixed;
     top: 10em;
-    right: -27.7em;
+    right: -28rem;
     transition: 1s ease-in-out;
     color: white;
     background-color: black;
     padding-top: 2em;
     padding-bottom: 2em;
-    z-index: 100;
+    /*z-index: 1000;*/
+}
+
+@supports (-ms-ime-align:auto) {
+    #menu {
+        right: -26rem;
+    }
+}
+
+@-moz-document url-prefix() {
+    #menu {
+        right: -24rem;
+    }
 }
 
 #menu:hover {
@@ -101,10 +113,11 @@ footer {
 
 #news, #blog {
     width: 100%;
+    display: inline-grid;
 }
 
 .blog-image {
-    max-width: 50%;
+    max-width: 25%;
     padding-right: 1em;
     padding-bottom: 1em;
 }
@@ -137,17 +150,22 @@ footer {
 
     .nav-link {
         padding: 8px;
+        font-size: 1.5em;
     }
     /*end sidemenu*/
+
+    .blog-image {
+        max-width: 50%;
+    }
 }
 
 @media only screen and (max-width: 379px) {
-    #nav-link {
-        min-width: 46%;
-        line-height: 0em;
-        display: inline-block;
-        padding: 39px;
-        margin: 6px;
+    nav {
+        display: grid;
+    }
+
+    #menu {
+
     }
 
     .blog-image {

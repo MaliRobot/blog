@@ -14,3 +14,7 @@ venv/*
 
 # static files
 nonlinear/staticfiles/*
+
+# node
+node_modules/*
+
