@@ -9,7 +9,7 @@ from .forms import ContactForm
 
 
 def index(request):
-    news_articles = News.objects.filter(public=True).order_by('-date_published')[:5]
+    news_articles = News.objects.filter(public=True).order_by('-date_published')
     page = request.GET.get('page', 1)
     paginator = Paginator(news_articles, 5)
     template = loader.get_template('index.html')
@@ -23,13 +23,15 @@ def index(request):
 
 
 def blog(request):
-    posts = Post.objects.filter(public=True).order_by('-date_published')[:5]
+    posts = Post.objects.filter(public=True).order_by('-date_published')
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)
     blog_posts = paginator.page(page)
     template = loader.get_template('blog.html')
+    news = News.objects.filter(public=True).order_by('-date_published')[:10]
     context = {
         'blog_posts': blog_posts,
+        'news': news,
     }
     return HttpResponse(template.render(context, request))
 
@@ -45,7 +47,13 @@ def poems(request):
 
 def single_post(request, pk):
     post = get_object_or_404(Post, public=True, pk=pk)
-    return render(request, 'single_post.html', {'post': post})
+    posts = Post.objects.filter(public=True).exclude(pk=pk).order_by('-date_published')[:10]
+    template = loader.get_template('single_blogpost.html')
+    context = {
+        'post': post,
+        'posts': posts,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def releases(request):
@@ -70,3 +78,5 @@ def contact_form(request):
 def about(request):
     template = loader.get_template('about.html')
     return render(request, 'about.html')
+
+

@@ -128,8 +128,20 @@ footer {
     font-size: 1em;
 }
 
+.news-title-preview {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
+    font-family: 'Archivo', sans-serif;
+}
+
 .blogpost-lead-preview {
     font-size: 0.6em;
+}
+
+.news-text-preview {
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.7em;
 }
 
 #version {

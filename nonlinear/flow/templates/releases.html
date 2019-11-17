@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Releases</h1>
-{% for release in releases %}
-    <h1>{{ release.name }}</h1>
-    <p>{{ release.artist }}</p>
-    <p>{{ release.description | safe }}</p>
-    <p>{{ release.author | safe }}</p>
-    <p>{{ release.release_date }}</p>
-    {% for image in release.images %}
-        <img src="{{ image.image.url }}" />
+<div class="container-fluid">
+    <h1>Releases</h1>
+    {% for release in releases %}
+        <h1>{{ release.name }}</h1>
+        <p>{{ release.artist }}</p>
+        <p>{{ release.description | safe }}</p>
+        <p>{{ release.author | safe }}</p>
+        <p>{{ release.release_date }}</p>
+        {% for image in release.images %}
+            <img src="{{ image.image.url }}" />
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+</div>
 {% endblock %}

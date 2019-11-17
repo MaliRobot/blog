@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -18,10 +19,10 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
     text = RichTextField()
-    author = models.OneToOneField(User, on_delete="")
+    author = models.ManyToManyField(User)
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
-    images = models.ForeignKey(Image, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='static/images/', blank=True, default=None)
     date_published = models.DateTimeField('date published')
 
     def __str__(self):
@@ -86,5 +87,24 @@ class Poem(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class About(models.Model):
+    text = models.TextField()
+
+    def __str__(self):
+        return "about"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(About, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
 
 
