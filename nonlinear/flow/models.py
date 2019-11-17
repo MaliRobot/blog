@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils import timezone
-from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -19,7 +18,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
     text = RichTextField()
-    author = models.ManyToManyField(User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to='static/images/', blank=True, default=None)
