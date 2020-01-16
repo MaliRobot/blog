@@ -1,7 +1,13 @@
 
 
 {% block meta %}
+{% load meta %}
     <meta name="description" content="Is a very good blog.">
     <meta name="keywords" content="writing, music, poetry, gaming, graphs">
-    <meta name="author" content="mali robot">
+    <meta name="author" content="mali robot and maybe some other people, robots">
+{% if meta %}
+    {% if meta.image %}{% og_prop 'image' meta.image %}{% endif %}
+    {% if meta.image_width %}{% og_prop 'image:width' meta.image_width %}{% endif %}
+    {% if meta.image_height %}{% og_prop 'image:height' meta.image_height %}{% endif %}
+{% endif %}
 {% endblock %}

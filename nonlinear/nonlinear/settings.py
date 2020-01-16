@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'debug_toolbar',
+    'meta',
 ]
 
 MIDDLEWARE = [
@@ -157,5 +158,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+META_SITE_PROTOCOL = 'http'
+META_SITE_DOMAIN = 'localhost'
 
 

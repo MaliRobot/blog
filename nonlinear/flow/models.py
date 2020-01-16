@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from meta.models import ModelMeta
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Image(models.Model):
         return self.name
 
 
-class Post(models.Model):
+class Post(ModelMeta, models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
     text = RichTextField()
@@ -23,6 +24,16 @@ class Post(models.Model):
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to='static/images/', blank=True, default=None)
     date_published = models.DateTimeField('date published')
+
+    _metadata = {
+        'title': 'name',
+        'description': 'abstract',
+        'image': 'get_meta_image',
+    }
+
+    def get_meta_image(self):
+        if self.image:
+            return self.image.path
 
     def __str__(self):
         return self.title
