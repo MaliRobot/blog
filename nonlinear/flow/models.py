@@ -26,14 +26,15 @@ class Post(ModelMeta, models.Model):
     date_published = models.DateTimeField('date published')
 
     _metadata = {
-        'title': 'name',
-        'description': 'abstract',
+        'title': title,
+        'author': author,
+        'description': lead,
         'image': 'get_meta_image',
     }
 
     def get_meta_image(self):
         if self.image:
-            return self.image.path
+            return self.image.url
 
     def __str__(self):
         return self.title

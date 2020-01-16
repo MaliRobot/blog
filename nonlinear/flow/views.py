@@ -17,7 +17,7 @@ def index(request):
     posts = Post.objects.order_by('-date_published')[:10]
     context = {
         'news': news,
-        'posts': posts
+        'posts': posts,
     }
     return HttpResponse(template.render(context, request))
 
@@ -49,7 +49,7 @@ def single_post(request, pk):
     post = get_object_or_404(Post, public=True, pk=pk)
     posts = Post.objects.filter(public=True).exclude(pk=pk).order_by('-date_published')[:10]
     template = loader.get_template('single_blogpost.html')
-    print(post.as_meta())
+
     context = {
         'post': post,
         'posts': posts,

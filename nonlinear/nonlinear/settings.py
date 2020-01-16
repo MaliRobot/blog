@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', config('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS'))]
+ALLOWED_HOSTS = ['127.0.0.1'] #[os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS'))]
 
 INTERNAL_IPS = ['127.0.0.1',]
 
@@ -149,6 +149,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+META_SITE_PROTOCOL = 'http'
+META_SITE_DOMAIN = 'localhost'
+META_USE_OG_PROPERTIES = True
+META_USE_TWITTER_PROPERTIES = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -159,7 +163,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-META_SITE_PROTOCOL = 'http'
-META_SITE_DOMAIN = 'localhost'
+
 
 
