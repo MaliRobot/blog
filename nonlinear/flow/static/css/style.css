@@ -179,6 +179,10 @@ footer {
 }
 
 @media only screen and (max-width: 768px) {
+    .main-title {
+        font-size: 6em;
+    }
+
     /*sidemenu*/
     #menu {
         /*display: none;*/
@@ -206,6 +210,11 @@ footer {
 }
 
 @media only screen and (max-width: 379px) {
+    .main-title {
+        font-size: 4em;
+        padding-top: 1em;
+    }
+
     /*
      * Made by Erik Terwan
      * 24th of November 2015
