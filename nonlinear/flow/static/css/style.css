@@ -141,7 +141,7 @@ footer {
 }
 /*end sidemenu*/
 
-.posts {
+.posts, #news {
     border-right: 0.5px #dedede solid;
     padding-right: 1em;
 }
@@ -225,7 +225,7 @@ footer {
 }
 
 @media only screen and (max-width: 576px) {
-    .posts {
+    .posts, #news {
         border: unset;
         padding-right: unset;
     }
