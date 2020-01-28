@@ -26,9 +26,9 @@ class Post(ModelMeta, models.Model):
     date_published = models.DateTimeField('date published')
 
     _metadata = {
-        'title': title,
-        'author': author,
-        'description': lead,
+        'title': 'title',
+        'author': 'author',
+        'description': 'lead',
         'image': 'get_meta_image',
     }
 
