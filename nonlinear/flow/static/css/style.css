@@ -141,9 +141,24 @@ footer {
 }
 /*end sidemenu*/
 
+.posts {
+    border-right: 0.5px #dedede solid;
+    padding-right: 1em;
+}
+
+.blog-post-published {
+    display: flex;
+}
+
 #news, #blog {
     width: 100%;
     display: inline-grid;
+}
+
+.blog-lead {
+    font-style: italic;
+    font-size: 1.2em;
+    font-family: serif;
 }
 
 .blog-image {
@@ -206,6 +221,13 @@ footer {
 
     .blog-image {
         max-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .posts {
+        border: unset;
+        padding-right: unset;
     }
 }
 

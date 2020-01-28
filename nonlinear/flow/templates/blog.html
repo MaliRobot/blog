@@ -7,10 +7,11 @@
                 {% for post in blog_posts %}
                 <div class="posts">
                     <h1>{{ post.title }}</h1>
-                    <div>
-                        <p class="blog-time">{{ post.date_published | date:'H:i d-m-Y '}}</p>
-                        <p class="blog-author">{{ post.author }}</p>
+                    <div class="blog-post-published">
+                        <p class="blog-author">- {{ post.author }},&nbsp;</p>
+                        <p class="blog-time">{{ post.date_published | date:'jS F Y'}}</p>
                     </div>
+                    <p class="blog-lead">{{ post.lead }}</p>
                     <div class="img-wrapper">
                         {% if post.image %}
                         <img class="blog-image" src="{{ post.image.url }}" align=left />
