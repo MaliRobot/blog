@@ -14,7 +14,7 @@ def index(request):
     paginator = Paginator(news_articles, 5)
     template = loader.get_template('index.html')
     news = paginator.page(page)
-    posts = Post.objects.order_by('-date_published')[:10]
+    posts = Post.objects.filter(public=True).order_by('-date_published')[:10]
     context = {
         'news': news,
         'posts': posts,
