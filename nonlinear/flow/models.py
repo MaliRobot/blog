@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils import timezone
 from meta.models import ModelMeta
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -24,6 +25,7 @@ class Post(ModelMeta, models.Model):
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to='static/images/', blank=True, default=None)
     date_published = models.DateTimeField('date published')
+    tags = TaggableManager()
 
     _metadata = {
         'title': 'title',
