@@ -13,8 +13,13 @@
     src: url('../fonts/Tox Typewriter.ttf');
 }
 
+@font-face {
+    font-family: Merriweather;
+    src: url('../fonts/Merriweather-Regular.ttf');
+}
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Archivo', sans-serif;
+    font-family: "Merriweather", sans-serif;
     word-wrap: break-word;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
@@ -23,8 +28,17 @@ h1, h2, h3, h4, h5, h6 {
     hyphens: auto;
 }
 
-p, a {
+a {
     font-family: 'Roboto', sans-serif;
+}
+
+p {
+    font-family: "Merriweather", serif;
+    font-weight: 400 !important;
+}
+
+#menu-title-heading {
+    font-family: "Archivo", sans-serif;
 }
 
 header,
