@@ -95,7 +95,7 @@ class Poem(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     public = models.BooleanField()
-    author = models.ForeignKey(User, on_delete="", null=True)
+    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=timezone.now, blank=False)
 
     def __str__(self):
