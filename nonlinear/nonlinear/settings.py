@@ -30,7 +30,7 @@ DEBUG = os.getenv('DEBUG', config('DEBUG'))
 
 ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS'))]
 
-INTERNAL_IPS = ['127.0.0.1',]
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
