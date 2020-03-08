@@ -7,9 +7,11 @@
 {% block content %}
 <div class="container-fluid">
     {% for poem in poems %}
-        <h3>{{ poem.title }}</h3>
-        <p>{{ poem.text }}</p>
-        <div>(*)$%</div>
+        <div class="poem-wrapper">
+            <h3>{{ poem.title }}</h3>
+            <p>{{ poem.text }}</p>
+            <div>(*)$%</div>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}
