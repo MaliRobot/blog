@@ -121,7 +121,7 @@ footer {
 
 @-moz-document url-prefix() {
     #menu {
-        right: -25rem;
+        right: -27rem;
     }
 }
 
@@ -130,11 +130,20 @@ footer {
 }
 
 #menu-title {
-    writing-mode: vertical-rl;
+    writing-mode: vertical-lr;
     text-orientation: upright;
     font-family: 'Roboto', sans-serif;
-    right: -2em;
-    padding-top: 1.25em;
+    right: 2em;
+    padding-top: 1.3em;
+}
+
+@-moz-document url-prefix() {
+    #menu-title {
+        writing-mode: lr;
+        right: unset;
+        text-orientation: upright;
+        padding-top: unset;
+    }
 }
 
 .nav-link {
