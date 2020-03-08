@@ -20,7 +20,7 @@ class Post(ModelMeta, models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
     text = RichTextField()
-    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to='static/images/', blank=True, default=None)
@@ -95,7 +95,7 @@ class Poem(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     public = models.BooleanField()
-    author = models.OneToOneField(User, on_delete="", null=True)
+    author = models.ForeignKey(User, on_delete="", null=True)
     date_created = models.DateTimeField(default=timezone.now, blank=False)
 
     def __str__(self):
