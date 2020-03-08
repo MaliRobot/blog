@@ -92,7 +92,7 @@ footer {
     background-color: black;
     padding-top: 2em;
     padding-bottom: 2em;
-    /*z-index: 1000;*/
+    z-index: 1000;
 }
 
 #menu-mobile {
