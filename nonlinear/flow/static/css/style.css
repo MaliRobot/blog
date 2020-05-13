@@ -204,7 +204,7 @@ footer {
 }
 
 .post-tags {
-    display: flex;
+    display: block;
     font-family: "ToxTypewriter", Helvetica, Arial, sans-serif;
 }
 
