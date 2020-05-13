@@ -93,7 +93,7 @@ class Order(models.Model):
 
 class Poem(models.Model):
     title = models.CharField(max_length=255)
-    text = models.TextField()
+    text = RichTextField()
     public = models.BooleanField()
     author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=timezone.now, blank=False)

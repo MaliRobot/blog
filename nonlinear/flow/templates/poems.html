@@ -9,7 +9,7 @@
     {% for poem in poems %}
         <div class="poem-wrapper">
             <h3>{{ poem.title }}</h3>
-            <p>{{ poem.text }}</p>
+            <p>{{ poem.text | safe }}</p>
             <div>(*)$%</div>
         </div>
     {% endfor %}
