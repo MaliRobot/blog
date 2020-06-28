@@ -6,16 +6,29 @@
 
 {% block content %}
 <div class="container-fluid">
-    <h1>Releases</h1>
-    {% for release in releases %}
-        <h1>{{ release.name }}</h1>
-        <p>{{ release.artist }}</p>
-        <p>{{ release.description | safe }}</p>
-        <p>{{ release.author | safe }}</p>
-        <p>{{ release.release_date }}</p>
-        {% for image in release.images %}
-            <img src="{{ image.image.url }}" />
+    <h1 class="album-title">Releases</h1>
+    <div class="row">
+        {% for album in albums %}
+            <div class="col-12 row">
+                <div class="col-6">
+                    <h1>{{ album.name }}</h1>
+                </div>
+                <div class="col-6">
+                    <h1>{{ album.artist }}</h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <p>{{ album.release_date }}</p>
+            </div>
+            <div class="col-12">
+                <div class="col-6">
+                    <p>{{ album.description | safe }}</p>
+                </div>
+                <div>
+                    <img src="{{ album.image.file.url }}" />
+                </div>
+            </div>
         {% endfor %}
-    {% endfor %}
+    </div>
 </div>
 {% endblock %}

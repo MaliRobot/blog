@@ -74,8 +74,8 @@ class Album(models.Model):
     artist = models.CharField(max_length=255)
     description = models.TextField()
     code = models.CharField(max_length=12)
-    release_date = models.DateTimeField('release date')
-    images = models.ForeignKey(Image, on_delete=models.CASCADE)
+    release_date = models.DateField('release date')
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

@@ -222,6 +222,10 @@ footer {
     padding-bottom: 2em;
 }
 
+.album-title {
+    text-align: center;
+}
+
 #version {
     padding-left: 15px;
 }

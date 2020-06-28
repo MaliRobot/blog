@@ -19,6 +19,13 @@ from django.conf import settings
 from django.urls import path
 from flow import views as flew
 from django.conf.urls.static import static
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register(r'news', flew.NewsViewSet)
+router.register(r'posts', flew.PostViewSet)
+router.register(r'albums', flew.AlbumViewSet)
+router.register(r'poems', flew.PoemViewSet)
 
 urlpatterns = [
     path('', flew.index),
@@ -29,6 +36,7 @@ urlpatterns = [
     path('releases', flew.releases),
     path('contact', flew.contact_form),
     path('about', flew.about),
+    path('api/', include(router.urls)),
     # path('', flew.index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

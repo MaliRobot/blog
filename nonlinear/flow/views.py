@@ -6,6 +6,8 @@ from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from .models import News, Post, Album, Poem
 from .forms import ContactForm
+from rest_framework import viewsets
+from .serializers import NewsSerializer, PostSerializer, AlbumSerializer, PoemSerializer
 
 
 def index(request):
@@ -64,6 +66,7 @@ def releases(request):
     context = {
         'albums': albums,
     }
+    print(albums[0].image.file.url)
     return HttpResponse(template.render(context, request))
 
 
@@ -80,5 +83,37 @@ def contact_form(request):
 def about(request):
     template = loader.get_template('about.html')
     return render(request, 'about.html')
+
+
+class NewsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for news.
+    """
+    queryset = News.objects.all().order_by('-date_published')
+    serializer_class = NewsSerializer
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for posts.
+    """
+    queryset = Post.objects.all().order_by('-date_published')
+    serializer_class = PostSerializer
+
+
+class AlbumViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for albums.
+    """
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+
+
+class PoemViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for poems.
+    """
+    queryset = Poem.objects.all().order_by('-date_created')
+    serializer_class = PoemSerializer
 
 
