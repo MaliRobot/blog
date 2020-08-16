@@ -12,8 +12,9 @@
                         <p class="blog-time">{{ event.end | date:'jS F Y' }}</p>
                     </div>
                     {% if event.show_map %}
+                    <button id="map-btn-{{ event.id }}" onclick="showOnMap([{{ event.location }}], {{ event.id }})">Show map</button>
+                    <button class="hide-map-btn" id="map-btn-hide-{{ event.id }}" onclick="hideMap([{{ event.location }}], {{ event.id }})">Hide map</button>
                     <div class="leaflet-container" id="map-{{ event.id }}"></div>
-                    <button onclick="showOnMap([{{ event.location }}], {{ event.id }})">Show</button>
                     {% endif %}
                     <p class="blog-text">{{ event.description | safe }}</p>
                 </div>
@@ -54,33 +55,29 @@
     </div>
     <script>
         function showOnMap(coords, id) {
-            //set up our map
-            var map = L.map('map-' + id).setView(coords, 12);
+            $('#map-' + id).show();
+            $('#map-btn-' + id).hide();
+            $('#map-btn-hide-' + id).show();
+
+            let map = L.map('map-' + id).setView(coords, 16);
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 {
                     maxZoom: 18
                 }).addTo(map);
 
-            //this is how we are going to demo our sendlatlng function
-            map.on('click', onMapClick);
-
-
-            //use this variable to track our marker here outside of the sendlatlng function
-            var myMarker = L.marker(coords).addTo(map);
-
-            //in our example, we are going to listend for clicks on the map to trigger
-            //changes to the coords with our sendlatlng function
-            function onMapClick(e) {
-                sendlatlng(e.latlng)
-            }
-
-            //update the map and marker positions based on the coords passed to the function
-            //we will just update our existing map and myMarker variables instead of create new ones
-            function sendlatlng(coords) {
-                map.setView(coords, 12);
-                myMarker.setLatLng(coords);
-
-            }
+            let marker = L.marker(coords).addTo(map);
         }
+
+        function hideMap(coords, id) {
+            $('#map-' + id).hide();
+            $('#map-btn-' + id).show();
+            $('#map-btn-hide-' + id).hide();
+        }
+
+        $(document).ready(function (){
+            $('.hide-map-btn').hide();
+            $('#map-btn-hide-' + id).hide();
+            $('.leaflet-container').hide();
+        });
     </script>
 {% endblock %}
