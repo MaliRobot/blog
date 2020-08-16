@@ -4,6 +4,8 @@ from ckeditor.fields import RichTextField
 from django.utils import timezone
 from meta.models import ModelMeta
 from taggit.managers import TaggableManager
+from django.db import models
+from location_field.models.plain import PlainLocationField
 
 # Create your models here.
 
@@ -76,6 +78,7 @@ class Album(models.Model):
     code = models.CharField(max_length=12)
     release_date = models.DateField('release date')
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    public = models.BooleanField()
 
     def __str__(self):
         return self.name
@@ -100,6 +103,20 @@ class Poem(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    description = RichTextField()
+    city = models.CharField(max_length=255, default='Belgrade')
+    location = PlainLocationField(based_fields=['city'], default='44.815971791260516,20.46053409576416', zoom=2)
+    show_map = models.BooleanField()
+    start = models.DateTimeField(default=timezone.now, blank=False)
+    end = models.DateTimeField(default=timezone.now, blank=True)
+    public = models.BooleanField()
+
+    def __str__(self):
+        return self.name
 
 
 class About(models.Model):

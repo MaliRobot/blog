@@ -230,6 +230,11 @@ footer {
     padding-left: 15px;
 }
 
+#map,
+.leaflet-container {
+    height: 500px;
+}
+
 @media only screen and (max-width: 768px) {
     .main-title {
         font-size: 6em;

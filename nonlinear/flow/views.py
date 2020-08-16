@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
-from .models import News, Post, Album, Poem
+from .models import News, Post, Album, Poem, Event
 from .forms import ContactForm
 from rest_framework import viewsets
 from .serializers import NewsSerializer, PostSerializer, AlbumSerializer, PoemSerializer
@@ -66,7 +66,20 @@ def releases(request):
     context = {
         'albums': albums,
     }
-    print(albums[0].image.file.url)
+    return HttpResponse(template.render(context, request))
+
+
+def events(request):
+    events_all = Event.objects.filter(public=True).order_by('-start')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(events_all, 5)
+    events = paginator.page(page)
+    template = loader.get_template('calendar.html')
+    news = News.objects.filter(public=True).order_by('-date_published')[:10]
+    context = {
+        'events': events,
+        'news': news,
+    }
     return HttpResponse(template.render(context, request))
 
 
@@ -81,7 +94,6 @@ def contact_form(request):
 
 
 def about(request):
-    template = loader.get_template('about.html')
     return render(request, 'about.html')
 
 

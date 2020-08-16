@@ -17,25 +17,26 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path
-from flow import views as flew
+from flow import views as flow_views
 from django.conf.urls.static import static
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register(r'news', flew.NewsViewSet)
-router.register(r'posts', flew.PostViewSet)
-router.register(r'albums', flew.AlbumViewSet)
-router.register(r'poems', flew.PoemViewSet)
+router.register(r'news', flow_views.NewsViewSet)
+router.register(r'posts', flow_views.PostViewSet)
+router.register(r'albums', flow_views.AlbumViewSet)
+router.register(r'poems', flow_views.PoemViewSet)
 
 urlpatterns = [
-    path('', flew.index),
+    path('', flow_views.index),
     path('admin/', admin.site.urls),
-    path('blog/<int:pk>/', flew.single_post),
-    path('blog', flew.blog),
-    path('poetry', flew.poems),
-    path('releases', flew.releases),
-    path('contact', flew.contact_form),
-    path('about', flew.about),
+    path('blog/<int:pk>/', flow_views.single_post),
+    path('blog', flow_views.blog),
+    path('poetry', flow_views.poems),
+    path('releases', flow_views.releases),
+    path('events', flow_views.events),
+    path('contact', flow_views.contact_form),
+    path('about', flow_views.about),
     path('api/', include(router.urls)),
     # path('', flew.index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

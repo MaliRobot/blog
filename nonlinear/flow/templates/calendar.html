@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load leaflet_tags %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9" id="blog">
+                {% for event in events %}
+                <div class="posts">
+                    <h1>{{ event.name }}</h1>
+                    <div class="blog-post-published">
+                        <p class="blog-time">{{ event.start | date:'jS F Y' }}</p>
+                        <p class="blog-time">{{ event.end | date:'jS F Y' }}</p>
+                    </div>
+                    {% if event.show_map %}
+                    <div class="leaflet-container" id="map-{{ event.id }}"></div>
+                    <button onclick="showOnMap([{{ event.location }}], {{ event.id }})">Show</button>
+                    {% endif %}
+                    <p class="blog-text">{{ event.description | safe }}</p>
+                </div>
+                {% endfor %}
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <h2>Latest news</h2>
+                    {% for new in news %}
+                    <div class="news-text-preview">
+                        <h3>
+                            <a class="news-title-preview" href="/">{{ new.title }}</a>
+                            <p>{{ new.text | safe }}</p>
+                        </h3>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if post.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ news.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    {% if post.has_previous or post.has_next %}
+                    <span class="current">
+                        Page {{ post.number }} of {{ post.paginator.num_pages }}.
+                    </span>
+                    {% endif %}
+
+                    {% if post.has_next %}
+                        <a href="?page={{ news.next_page_number }}">next</a>
+                        <a href="?page={{ news.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showOnMap(coords, id) {
+            //set up our map
+            var map = L.map('map-' + id).setView(coords, 12);
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 18
+                }).addTo(map);
+
+            //this is how we are going to demo our sendlatlng function
+            map.on('click', onMapClick);
+
+
+            //use this variable to track our marker here outside of the sendlatlng function
+            var myMarker = L.marker(coords).addTo(map);
+
+            //in our example, we are going to listend for clicks on the map to trigger
+            //changes to the coords with our sendlatlng function
+            function onMapClick(e) {
+                sendlatlng(e.latlng)
+            }
+
+            //update the map and marker positions based on the coords passed to the function
+            //we will just update our existing map and myMarker variables instead of create new ones
+            function sendlatlng(coords) {
+                map.setView(coords, 12);
+                myMarker.setLatLng(coords);
+
+            }
+        }
+    </script>
+{% endblock %}

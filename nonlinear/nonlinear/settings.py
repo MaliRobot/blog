@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'meta',
     'taggit',
+    'leaflet',
+    'djgeojson',
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
@@ -178,5 +181,17 @@ CKEDITOR_CONFIGS = {
             ['Maximize'],
         ], 'extraPlugins': 'justify, liststyle, indent',
    },
+}
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (44.787197, 20.457273),
+    'DEFAULT_ZOOM': 1,
+    'MIN_ZOOM': 10,
+    'MAX_ZOOM': 18,
+}
+
+LOCATION_FIELD = {
+    'map.provider': 'openstreetmap',
+    'search.provider': 'google',
 }
 
