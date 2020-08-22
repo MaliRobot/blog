@@ -169,6 +169,15 @@ footer {
     padding-right: 1em;
 }
 
+.events {
+    border-bottom: 0.5px #dedede solid;
+    padding-right: 1em;
+}
+
+.events-title {
+    margin-bottom: 0;
+}
+
 .blog-post-published {
     display: flex;
 }
@@ -233,6 +242,10 @@ footer {
 #map,
 .leaflet-container {
     height: 500px;
+}
+
+.blog-post-published > div {
+    padding: 0;
 }
 
 @media only screen and (max-width: 768px) {

@@ -3,21 +3,30 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-9" id="blog">
+            <div class="col-xs-12 col-sm-9" id="event">
                 {% for event in events %}
-                <div class="posts">
-                    <h1>{{ event.name }}</h1>
-                    <div class="blog-post-published">
-                        <p class="blog-time">{{ event.start | date:'jS F Y' }}</p>
-                        <p class="blog-time">{{ event.end | date:'jS F Y' }}</p>
+                    <div class="events">
+                        <h1 class="events-title">{{ event.name }}</h1>
+                        <div class="blog-post-published d-xs-block">
+                            <div class="col-xs-12 col-sm-4">
+                                <h6 class="blog-time">Start - {{ event.start | date:'jS F Y h:s:i' }}</h6>
+                            </div>
+                            {% if event.end %}
+                            <div class="col-xs-12 col-sm-4">
+                                <h6 class="blog-time">End - {{ event.end | date:'jS F Y h:s:i' }}</h6>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% if event.address %}
+                            <div class="">{{ event.address }}</div>
+                        {% endif %}
+                        {% if event.show_map %}
+                            <button id="map-btn-{{ event.id }}" onclick="showOnMap([{{ event.location }}], {{ event.id }})">Show on map</button>
+                            <button class="hide-map-btn" id="map-btn-hide-{{ event.id }}" onclick="hideMap([{{ event.location }}], {{ event.id }})">Hide map</button>
+                            <div class="leaflet-container" id="map-{{ event.id }}"></div>
+                        {% endif %}
+                        <p class="blog-text">{{ event.description | safe }}</p>
                     </div>
-                    {% if event.show_map %}
-                    <button id="map-btn-{{ event.id }}" onclick="showOnMap([{{ event.location }}], {{ event.id }})">Show map</button>
-                    <button class="hide-map-btn" id="map-btn-hide-{{ event.id }}" onclick="hideMap([{{ event.location }}], {{ event.id }})">Hide map</button>
-                    <div class="leaflet-container" id="map-{{ event.id }}"></div>
-                    {% endif %}
-                    <p class="blog-text">{{ event.description | safe }}</p>
-                </div>
                 {% endfor %}
                 </div>
                 <div class="col-xs-12 col-sm-3">
