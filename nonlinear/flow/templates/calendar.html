@@ -72,12 +72,13 @@
             $('#map-' + id).hide();
             $('#map-btn-' + id).show();
             $('#map-btn-hide-' + id).hide();
+            $('.leaflet-container').hide();
         }
 
         $(document).ready(function (){
+            $('.leaflet-container').hide();
             $('.hide-map-btn').hide();
             $('#map-btn-hide-' + id).hide();
-            $('.leaflet-container').hide();
         });
     </script>
 {% endblock %}
