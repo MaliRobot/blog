@@ -118,6 +118,9 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASS', config('DB_PASS')),
         'HOST': os.getenv('DB_HOST', config('DB_HOST')),
         'PORT': '',
+        'OPTIONS': {
+            'charset': 'utf8mb4'
+        }
     }
 }
 

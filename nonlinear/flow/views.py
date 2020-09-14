@@ -74,7 +74,7 @@ def events(request):
     page = request.GET.get('page', 1)
     paginator = Paginator(events_all, 5)
     events = paginator.page(page)
-    template = loader.get_template('calendar.html')
+    template = loader.get_template('events.html')
     news = News.objects.filter(public=True).order_by('-date_published')[:10]
     context = {
         'events': events,

@@ -170,12 +170,47 @@ footer {
 }
 
 .events {
-    border-bottom: 0.5px #dedede solid;
     padding-right: 1em;
+}
+
+.events-main-title {
+    padding-left: 0;
 }
 
 .events-title {
     margin-bottom: 0;
+    border-color: #B0B0B0;
+    border-bottom: solid 1px;
+}
+
+.event-time {
+    margin-top: 3px;
+}
+
+.event-address {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: fit-content;
+    background-color: #b0b0b0;
+    font-size: 10px;
+}
+
+.map-btn,
+.hide-map-btn {
+    font-family: "ToxTypewriter", Helvetica, Arial, sans-serif;
+    position: relative;
+    color: white;
+    background-color: black;
+    width: 120px;
+    height: 40px;
+    transition: all 0.3s;
+    margin-bottom: 2em;
+}
+
+.map-btn:hover,
+.hide-map-btn:hover {
+    background-color: white;
+    color: black;
 }
 
 .blog-post-published {
