@@ -26,6 +26,7 @@ router.register(r'news', flow_views.NewsViewSet)
 router.register(r'posts', flow_views.PostViewSet)
 router.register(r'albums', flow_views.AlbumViewSet)
 router.register(r'poems', flow_views.PoemViewSet)
+router.register(r'events', flow_views.EventViewSet)
 
 urlpatterns = [
     path('', flow_views.index),

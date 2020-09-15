@@ -7,7 +7,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import News, Post, Album, Poem, Event
 from .forms import ContactForm
 from rest_framework import viewsets
-from .serializers import NewsSerializer, PostSerializer, AlbumSerializer, PoemSerializer
+from .serializers import NewsSerializer, PostSerializer, AlbumSerializer, PoemSerializer, EventSerializer
+from rest_framework.pagination import CursorPagination
 
 
 def index(request):
@@ -101,7 +102,7 @@ class NewsViewSet(viewsets.ModelViewSet):
     """
     API endpoint for news.
     """
-    queryset = News.objects.all().order_by('-date_published')
+    queryset = News.objects.filter(public=True).order_by('-date_published')
     serializer_class = NewsSerializer
 
 
@@ -109,7 +110,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     API endpoint for posts.
     """
-    queryset = Post.objects.all().order_by('-date_published')
+    queryset = Post.objects.filter(public=True).order_by('-date_published')
     serializer_class = PostSerializer
 
 
@@ -117,7 +118,7 @@ class AlbumViewSet(viewsets.ModelViewSet):
     """
     API endpoint for albums.
     """
-    queryset = Album.objects.all()
+    queryset = Album.objects.filter(public=True).order_by('-release_date')
     serializer_class = AlbumSerializer
 
 
@@ -125,7 +126,15 @@ class PoemViewSet(viewsets.ModelViewSet):
     """
     API endpoint for poems.
     """
-    queryset = Poem.objects.all().order_by('-date_created')
+    queryset = Poem.objects.filter(public=True).order_by('-date_created')
     serializer_class = PoemSerializer
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for events.
+    """
+    queryset = Event.objects.filter(public=True).order_by('start')
+    serializer_class = EventSerializer
 
 
