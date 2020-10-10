@@ -8,6 +8,7 @@ from .models import News, Post, Album, Poem, Event
 from .forms import ContactForm
 from rest_framework import viewsets
 from .serializers import NewsSerializer, PostSerializer, AlbumSerializer, PoemSerializer, EventSerializer
+import datetime
 from rest_framework.pagination import CursorPagination
 
 
@@ -18,7 +19,9 @@ def index(request):
     template = loader.get_template('index.html')
     news = paginator.page(page)
     posts = Post.objects.filter(public=True).order_by('-date_published')[:10]
-    events = Event.objects.filter(public=True).order_by('-start')[:4]
+    today = datetime.date.today()
+    yesterday = today - datetime.timedelta(days=2)
+    events = Event.objects.filter(public=True, start__gt=yesterday).order_by('-start')[:4]
     context = {
         'news': news,
         'posts': posts,

@@ -20,3 +20,7 @@ $(window).on('load', function() {
         color++;
     });
 });
+
+$(window).load(function() {
+  $("body").removeClass("preload");
+});
