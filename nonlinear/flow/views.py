@@ -86,6 +86,17 @@ def events(request):
     return HttpResponse(template.render(context, request))
 
 
+def event(request, pk):
+    event = get_object_or_404(Event, public=True, pk=pk)
+    template = loader.get_template('event.html')
+    news = News.objects.filter(public=True).order_by('-date_published')[:10]
+    context = {
+        'event': event,
+        'news': news,
+    }
+    return HttpResponse(template.render(context, request))
+
+
 def contact_form(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

@@ -35,6 +35,7 @@ urlpatterns = [
     path('blog', flow_views.blog),
     path('poetry', flow_views.poems),
     path('releases', flow_views.releases),
+    path('events/<int:pk>', flow_views.event),
     path('events', flow_views.events),
     path('contact', flow_views.contact_form),
     path('about', flow_views.about),

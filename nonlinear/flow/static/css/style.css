@@ -255,10 +255,15 @@ footer {
     content: "§";
 }
 
-.event-text {
+.event-text,
+.event-link {
     font-size: 0.75em;
 }
 
+.event-link {
+    color: black;
+    font-family: "ToxTypewriter", Helvetica, Arial, sans-serif;
+}
 /** end homepage events **/
 
 .blog-post-published {

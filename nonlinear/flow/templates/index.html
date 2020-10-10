@@ -8,7 +8,7 @@
                 <div class="col-12" id="events-home">
                     <div class="row">
                     {% for event in events %}
-                        <div class="col-3" id="single-event-home">
+                        <div class="col-6 col-md-4 col-lg-3" id="single-event-home">
                             <h4 class="event-title">{{ event.name }}</h4>
                             {% if event.address %}
                             <p class="event-text">{{ event.address }}</p>
@@ -16,6 +16,7 @@
                                 <br>
                             {% endif %}
                             <p class="event-text">{{ event.start }}</p>
+                            <a class="event-link" href="/events/{{ event.id }}">more info...</a>
                         </div>
                     {% endfor %}
                     </div>
