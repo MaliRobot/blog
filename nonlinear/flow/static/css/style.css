@@ -100,7 +100,7 @@ footer {
     display: -webkit-box;
     position: fixed;
     top: 10em;
-    right: -24.5%;
+    right: -29em;
     transition: 1s ease-in-out;
     color: white;
     background-color: black;
@@ -121,7 +121,7 @@ footer {
 
 @-moz-document url-prefix() {
     #menu {
-        right: -21%;
+        right: -32em;
     }
 }
 
