@@ -3,6 +3,26 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-sm-9" id="news">
+                {% if events %}
+                <div class="events-border"></div>
+                <div class="col-12" id="events-home">
+                    <div class="row">
+                    {% for event in events %}
+                        <div class="col-3" id="single-event-home">
+                            <h4 class="event-title">{{ event.name }}</h4>
+                            {% if event.address %}
+                            <p class="event-text">{{ event.address }}</p>
+                            {% else %}
+                                <br>
+                            {% endif %}
+                            <p class="event-text">{{ event.start }}</p>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="events-border-bottom"></div>
+                {% endif %}
                 {% for news_article in news %}
                 <div class="news">
                     <h2>{{ news_article.title }}</h2>

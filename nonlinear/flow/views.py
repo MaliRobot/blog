@@ -18,9 +18,11 @@ def index(request):
     template = loader.get_template('index.html')
     news = paginator.page(page)
     posts = Post.objects.filter(public=True).order_by('-date_published')[:10]
+    events = Event.objects.filter(public=True).order_by('-start')[:4]
     context = {
         'news': news,
         'posts': posts,
+        'events': events,
     }
     return HttpResponse(template.render(context, request))
 
