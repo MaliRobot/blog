@@ -197,6 +197,10 @@ footer {
     font-size: 10px;
 }
 
+.event-address>p {
+    padding: 0 5px 0 5px;
+}
+
 .event-link-all {
     font-size: 1em;
     padding-left: 0;
@@ -369,10 +373,6 @@ footer {
         display: none;
     }
 
-    #menu-mobile {
-        display: none;
-    }
-
     .nav-link {
         padding: 8px;
         font-size: 1.5em;
@@ -387,7 +387,7 @@ footer {
 @media only screen and (max-width: 576px) {
     .posts, #news {
         border: unset;
-        padding-right: unset;
+        /*padding-right: unset;*/
     }
 }
 
@@ -530,17 +530,20 @@ footer {
      */
     #menu-mobile-links
     {
-      position: absolute;
-      width: 300px;
+      position: fixed;
+      width: 207px;
       margin: -100px 0 0 0;
       padding: 50px;
       padding-top: 125px;
       right: -100px;
-
+      overflow-x: hidden;
       background: #ededed;
       list-style-type: none;
       -webkit-font-smoothing: antialiased;
       /* to stop flickering of text in safari */
+
+      padding-left: 27px;
+      text-align: left;
 
       transform-origin: 0% 0%;
       transform: translate(100%, 0);

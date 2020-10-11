@@ -19,7 +19,7 @@
                             </div>
                             {% endif %}
                         </div>
-                        <div class="event-address col-3"><p>{% if event.address %}{{ event.address }}{% endif %} {% if event.city %}{{ event.city }}{% endif %}</p></div>
+                        <div class="event-address"><p>{% if event.address %}{{ event.address }}{% endif %} {% if event.city %}{{ event.city }}{% endif %}</p></div>
                         <p class="blog-text">{{ event.description | safe }}</p>
                         {% if event.show_map %}
                             <button class="map-btn" id="map-btn-{{ event.id }}" onclick="showOnMap([{{ event.location }}], {{ event.id }})">Show on map</button>
