@@ -58,6 +58,10 @@ footer {
     position: absolute;
 }
 
+.space {
+    height: 2em;
+}
+
 .main-title {
     font-size: 8em;
 
@@ -100,8 +104,8 @@ footer {
     display: -webkit-box;
     position: fixed;
     top: 10em;
-    right: -29em;
-    transition: 1s ease-in-out;
+    right: -32.5em;
+    transition: 0.5s ease-in-out;
     color: white;
     background-color: black;
     padding-top: 2em;
@@ -113,9 +117,18 @@ footer {
     display: none;
 }
 
-@supports (-ms-ime-align:auto) {
-    #menu {
-        right: -30em;
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+   #menu {
+       display: contents;
+       top: 0;
+       right: 0;
+       position: inherit;
+       background-color: white;
+       text-align: center;
+    }
+
+   .nav-link {
+        margin: 2px;
     }
 }
 
@@ -126,23 +139,42 @@ footer {
 }
 
 #menu:hover {
-    right: -15em;
+    right: -25em;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+   #menu:hover {
+        right: 0;
+    }
 }
 
 #menu-title {
-    writing-mode: vertical-lr;
+    writing-mode: lr-tb;
     text-orientation: upright;
     font-family: 'Roboto', sans-serif;
-    right: 2em;
-    padding-top: 2.2em;
+    /*right: 2em;*/
+    padding-top: 4%;
 }
 
-@-moz-document url-prefix() {
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    #menu {
+        /*display: none;*/
+        display: contents;
+        position: inherit;
+    }
+
     #menu-title {
-        writing-mode: lr;
-        right: unset;
-        text-orientation: upright;
-        padding-top: unset;
+        display: none;
+    }
+
+    #menu-mobile {
+        display: none;
+    }
+
+    .nav-link {
+        padding: 8px;
+        font-size: 1.5em;
+        line-height: 2em;
     }
 }
 
@@ -367,6 +399,10 @@ footer {
         /*display: none;*/
         display: contents;
         position: inherit;
+    }
+
+    #menu-title {
+        display: none;
     }
 
     #menu-mobile {
