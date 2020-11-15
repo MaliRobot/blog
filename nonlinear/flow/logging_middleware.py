@@ -15,6 +15,11 @@ class AccessLogsMiddleware(object):
             request.session.create()
 
         access_logs_data = dict()
+        response = self.get_response(request)
+
+        # exclusions
+        if request.path.endswith('.jpg') or request.path.endswith('.png') or request.path.startswith('/admin'):
+            return response
 
         # get the request path
         access_logs_data["path"] = request.path
@@ -39,9 +44,8 @@ class AccessLogsMiddleware(object):
         access_logs_data["timestamp"] = timezone.now()
 
         try:
-            AccessLogs(**access_logs_data).save()
+            AccessLog(**access_logs_data).save()
         except Exception as e:
             pass
 
-        response = self.get_response(request)
         return response
