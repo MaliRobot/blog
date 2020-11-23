@@ -18,8 +18,8 @@ class AccessLogsMiddleware(object):
         response = self.get_response(request)
 
         # exclusions
-        if request.path.endswith('.jpg') or request.path.endswith('.png') \
-                or request.path.endswith('.gif') or request.path.startswith('/admin'):
+        if request.path.startswith('/' + settings.MEDIA_URL) or request.path.startswith('/' + settings.STATIC_URL) \
+                or request.path.startswith('/admin'):
             return response
 
         # get the request path
