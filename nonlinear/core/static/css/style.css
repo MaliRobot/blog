@@ -389,6 +389,16 @@ footer {
   -o-transition: none !important;
 }
 
+/** error */
+#error {
+
+}
+
+.error-message {
+    text-align: center;
+}
+/** end error **/
+
 @media only screen and (max-width: 768px) {
     .main-title {
         font-size: 6em;

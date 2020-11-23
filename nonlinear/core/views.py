@@ -35,3 +35,13 @@ def contact_form(request):
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form, 'submitted': False})
+
+
+def error_404_view(request, exception):
+    template = loader.get_template('error404.html')
+    return HttpResponse(template.render({}, request))
+
+
+def error_505_view(request):
+    template = loader.get_template('error505.html')
+    return HttpResponse(template.render({}, request))

@@ -37,7 +37,6 @@ $(document).ready(function (){
 
     if (msieversion())
     {
-        console.log('as');
         $('#menu-links').removeClass('col-md-2');
     }
 })

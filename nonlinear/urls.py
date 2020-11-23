@@ -25,6 +25,7 @@ from events import views as event_views
 from poems import views as poem_views
 from posts import views as post_views
 from django.conf.urls.static import static
+from django.conf.urls import handler404, handler500
 from rest_framework import routers
 
 router = routers.SimpleRouter()
@@ -40,14 +41,16 @@ urlpatterns = [
     path('blog/<int:pk>/', post_views.single_post),
     path('blog', post_views.blog),
     path('poetry', poem_views.poems),
-    path('releases', album_views.releases),
+    # path('releases', album_views.releases),
     path('events/<int:pk>', event_views.event),
     path('events', event_views.events),
-    path('contact', core_views.contact_form),
+    # path('contact', core_views.contact_form),
     path('about', about_views.about),
     path('api/', include(router.urls)),
-    # path('', flew.index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'core.views.error_404_view'
+handler500 = 'core.views.error_505_view'
 
 if settings.DEBUG:
     import debug_toolbar

@@ -184,10 +184,10 @@ META_USE_TWITTER_PROPERTIES = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'nonlinear/staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'nonlinear/core/static')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'core/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'nonlinear/core/media')
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
