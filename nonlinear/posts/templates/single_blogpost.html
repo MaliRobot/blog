@@ -4,6 +4,8 @@
     {% include 'meta.html' %}
 {% endblock %}
 
+{% load social_share %}
+
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -29,6 +31,8 @@
                         {% endfor %}
                         </div>
                     </div>
+                    {% post_to_facebook "Facebook" %}
+                    {% post_to_twitter post.title object_or_url "Twitter" %}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-3">

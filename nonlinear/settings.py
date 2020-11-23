@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'taggit',
     'leaflet',
     'djgeojson',
+    'django_social_share',
     'location_field.apps.DefaultConfig',
 ]
 
