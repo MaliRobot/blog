@@ -21,13 +21,9 @@ mysqlclient==1.4.6
 Pillow==7.1.0
 protobuf==3.9.0
 PyMySQL==0.9.3
-pyparsing==2.4.6
-pyrsistent==0.15.7
-python-dateutil==2.8.1
 python-decouple==3.1
 pytz==2019.2
 six==1.12.0
 sqlparse==0.3.0
 tqdm==4.39.0
 zipp==3.1.0
-

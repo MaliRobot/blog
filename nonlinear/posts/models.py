@@ -33,6 +33,9 @@ class Post(ModelMeta, models.Model):
         if self.image:
             return self.image.url
 
+    def get_absolute_url(self):
+        return "/blog/%i/" % self.id
+
     def __str__(self):
         return self.title
 
