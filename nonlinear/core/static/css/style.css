@@ -360,6 +360,10 @@ footer {
     font-family: "ToxTypewriter", Helvetica, Arial, sans-serif;
 }
 
+.post-tags-title {
+    margin-bottom: 0;
+}
+
 .poem-wrapper {
     text-align: center;
     padding-bottom: 2em;
@@ -399,11 +403,38 @@ footer {
 }
 /** end error **/
 
-/** about */
+/** about **/
 #about-title {
     text-align: center;
 }
-/** end about */
+/** end about **/
+
+/** share **/
+.share {
+    display: flex;
+}
+
+.share-link {
+    display: flex;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 1em;
+    margin-right: 1em;
+    text-decoration: none;
+    transition: ease-in 100ms;
+}
+
+.share-link:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.share-text {
+    font-family: "ToxTypewriter", Helvetica, Arial, sans-serif;
+}
+/** end share **/
 
 @media only screen and (max-width: 768px) {
     .main-title {
