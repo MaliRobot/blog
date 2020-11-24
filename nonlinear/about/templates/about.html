@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 id="about-title">About all this</h1>
+            <div class="break">~#$*&~</div>
+            <div class="col-xs-12 offset-sm-3 col-sm-6" id="about-block">
+                {{ about.text | safe }}
+            </div>
+            <div class="break">~#$*&~</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

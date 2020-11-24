@@ -11,7 +11,7 @@ class Event(models.Model):
     description = RichTextField()
     address = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, default='Belgrade')
-    location = PlainLocationField(based_fields=['city'], default='44.815971791260516,20.46053409576416', zoom=2)
+    location = PlainLocationField(based_fields=['city'], default='44.815971791260516,20.46053409576416', zoom=2, blank=True)
     show_map = models.BooleanField()
     start = models.DateTimeField(default=timezone.now, blank=False)
     end = models.DateTimeField(blank=True, null=True)

@@ -399,6 +399,12 @@ footer {
 }
 /** end error **/
 
+/** about */
+#about-title {
+    text-align: center;
+}
+/** end about */
+
 @media only screen and (max-width: 768px) {
     .main-title {
         font-size: 6em;
