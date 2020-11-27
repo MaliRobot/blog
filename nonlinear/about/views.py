@@ -14,12 +14,13 @@ def about(request):
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        print(form.errors)
         if form.is_valid():
             message = Contact(subject=form.data['subject'], message=form.data['message'], email=form.data['email'])
             message.save()
             return render(request, 'about.html', {'form': None, 'submitted': True, 'about': about})
-    else:
-        form = ContactForm()
-        context['form'] = form
+
+    form = ContactForm()
+    context['form'] = form
 
     return HttpResponse(template.render(context, request))
