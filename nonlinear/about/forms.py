@@ -1,10 +1,10 @@
 from django import forms
 from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
+from captcha.widgets import ReCaptchaV3
 
 
 class ContactForm(forms.Form):
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV3)
     subject = forms.CharField(label='subject', max_length=255, widget=forms.TextInput(
         attrs={
             'placeholder': 'subject',
