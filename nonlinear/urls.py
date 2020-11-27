@@ -37,14 +37,13 @@ router.register(r'events', event_views.EventViewSet)
 
 urlpatterns = [
     path('', core_views.index),
-    path('admin/', admin.site.urls),
+    path('stavka/', admin.site.urls),
     path('blog/<int:pk>/', post_views.single_post),
     path('blog', post_views.blog),
     path('poetry', poem_views.poems),
     # path('releases', album_views.releases),
     path('events/<int:pk>', event_views.event),
     path('events', event_views.events),
-    # path('contact', core_views.contact_form),
     path('about', about_views.about),
     path('api/', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

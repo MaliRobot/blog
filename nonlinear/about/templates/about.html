@@ -10,6 +10,24 @@
                 {{ about.text | safe }}
             </div>
             <div class="break">~#$*&~</div>
+
+            <div class="col-xs-12 offset-sm-3 col-sm-6">
+                <h4>Get in touch</h4>
+                {% if submitted %}
+                    <p>We got your message.</p>
+                {% else %}
+                    <form action="/about" method="post">
+                        {% csrf_token %}
+                        <div class="">
+                            <div id="subject" class="contact-field">{{ form.subject }}</div>
+                            <div id="email" class="contact-field">{{ form.email }}</div>
+                            <div id="message" class="contact-field">{{ form.message }}</div>
+                            <div>{{ form.captcha }}</div>
+                            <input type="submit" value="Submit" />
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

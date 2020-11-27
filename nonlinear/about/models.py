@@ -24,3 +24,15 @@ class About(models.Model):
     def load(cls):
         obj, created = cls.objects.get_or_create(pk=1)
         return obj
+
+
+class Contact(models.Model):
+    subject = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    message = models.TextField()
+
+    class Meta:
+        db_table = "contacts"
+
+    def __str__(self):
+        return "contact"

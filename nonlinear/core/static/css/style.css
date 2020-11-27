@@ -37,6 +37,25 @@ p {
     font-weight: 400 !important;
 }
 
+input, textarea {
+    font-family: "Archivo", sans-serif;
+}
+
+input[type=submit] {
+    border: 1px solid black;
+    background-color: white;
+    padding: 1em;
+    margin-right: 1em;
+    text-decoration: none;
+    transition: ease-in 100ms;
+}
+
+input[type=submit]:hover {
+    border-color: white;
+    background-color: black;
+    color: white;
+}
+
 #menu-title-heading {
     font-family: "Archivo", sans-serif;
 }
@@ -406,6 +425,17 @@ footer {
 /** about **/
 #about-title {
     text-align: center;
+}
+
+.contact-field {
+    padding: 1em 0 1em;
+}
+
+input[type=text], input[type=email], textarea[name=message] {
+    background: transparent;
+    outline: 0;
+    border: none;
+    border-bottom: 1px solid #000000;
 }
 /** end about **/
 

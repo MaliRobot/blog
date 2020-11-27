@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'poems',
     'posts',
     'access_log',
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +62,7 @@ INSTALLED_APPS = [
     'social_share',
     'django_social_share',
     'location_field.apps.DefaultConfig',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -224,3 +227,6 @@ LOCATION_FIELD = {
     'search.provider': 'google',
 }
 
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', config('RECAPTCHA_PUBLIC_KEY'))
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', config('RECAPTCHA_PRIVATE_KEY'))
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
