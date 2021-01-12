@@ -19,7 +19,7 @@ class AccessLogsMiddleware(object):
 
         # exclusions
         if request.path.startswith(settings.MEDIA_URL) or request.path.startswith(settings.STATIC_URL) \
-                or request.path.startswith('/stavka'):
+                or request.path.startswith('/stavka') or request.path.startswith('/favicon.'):
             return response
 
         # get the request path

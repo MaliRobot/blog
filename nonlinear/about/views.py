@@ -14,7 +14,7 @@ def about(request):
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
-        print(form.errors)
+
         if form.is_valid():
             message = Contact(subject=form.data['subject'], message=form.data['message'], email=form.data['email'])
             message.save()
