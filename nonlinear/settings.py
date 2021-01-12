@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django_social_share',
     'location_field.apps.DefaultConfig',
     'captcha',
+    'imagekit',
 ]
 
 MIDDLEWARE = [

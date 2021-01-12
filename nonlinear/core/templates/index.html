@@ -32,7 +32,7 @@
                     </div>
                     <div class="img-wrapper">
                         {% if news_article.image %}
-                        <img class="blog-image" src="{{ news_article.image.url }}" align=left />
+                        <img class="blog-image" src="{{ news_article.image_thumbnail.url }}" align=left />
                         {% endif %}
                     </div>
                     <p class="blog-text">{{ news_article.text | safe }}</p>

@@ -1,5 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
 # Create your models here.
 
@@ -10,6 +12,10 @@ class News(models.Model):
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to='static/images/', blank=True, default=None)
+    image_thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFit(400, 200)],
+                                      format='JPEG',
+                                      options={'quality': 60})
     date_published = models.DateTimeField('date published')
 
     class Meta:
