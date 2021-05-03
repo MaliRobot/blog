@@ -1,6 +1,6 @@
 asgiref==3.3.4
 Django==3.2
-django-admin-interface==0.14.1
+django-admin-interface==0.16.3
 django-appconf==1.0.4
 django-autoslug==1.9.6
 django-ckeditor==5.9.0
