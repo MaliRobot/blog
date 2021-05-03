@@ -1,4 +1,4 @@
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from meta.models import ModelMeta
 from taggit.managers import TaggableManager
 from django.db import models
@@ -13,7 +13,7 @@ from imagekit.processors import ResizeToFit
 class Post(ModelMeta, models.Model):
     title = models.CharField(max_length=255)
     lead = models.CharField(max_length=255)
-    text = RichTextField()
+    text = RichTextUploadingField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')

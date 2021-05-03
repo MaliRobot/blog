@@ -46,6 +46,7 @@ urlpatterns = [
     path('events', event_views.events),
     path('about', about_views.about),
     path('api/', include(router.urls)),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'core.views.error_404_view'
