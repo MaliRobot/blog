@@ -1,5 +1,5 @@
 """
-WSGI config for nonlinear project.
+WSGI config for nonliteral project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
