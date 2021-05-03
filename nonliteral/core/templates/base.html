@@ -34,6 +34,16 @@
         </script>
         {% leaflet_js %}
         <script type="application/javascript" src="{% static '/JS/functions.js' %}"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EMYYWMVRY5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-EMYYWMVRY5');
+        </script>
     </head>
     <body>
         <a href="#" class="invisible_box"></a>
