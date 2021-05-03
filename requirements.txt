@@ -1,4 +1,4 @@
-Django==2.2.20
+Django==3.2
 django-admin-interface==0.14.1
 django-autoslug==1.9.6
 django-ckeditor==5.7.1
