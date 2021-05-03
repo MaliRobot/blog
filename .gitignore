@@ -15,7 +15,7 @@ blogenv/*
 
 # static files
 core/staticfiles/*
-nonliteral/core/static/images/*
+nonliteral/core/media
 
 # node
 node_modules/*

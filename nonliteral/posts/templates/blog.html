@@ -15,8 +15,8 @@
                     </div>
                     <p class="blog-lead">{{ post.lead }}</p>
                     <div class="img-wrapper">
-                        {% if post.image %}
-                        <img class="blog-image" src="{{ post.image.url }}" align=left />
+                        {% if post.image_thumbnail %}
+                        <img class="blog-image" src="{{ post.image_thumbnail.url }}" align=left />
                         {% endif %}
                     </div>
                     <p class="blog-text">{{ post.text | safe }}</p>

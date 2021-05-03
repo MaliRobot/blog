@@ -4,6 +4,8 @@ from taggit.managers import TaggableManager
 from django.db import models
 from django.contrib.auth.models import User
 from core.helpers import RandomFileName
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
 # Create your models here.
 
@@ -16,6 +18,10 @@ class Post(ModelMeta, models.Model):
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to=RandomFileName('static/images/'), blank=True, default=None)
+    image_thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFit(400, 200)],
+                                      format='JPEG',
+                                      options={'quality': 60})
     date_published = models.DateTimeField('date published')
     tags = TaggableManager(blank=True)
 
