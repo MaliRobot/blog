@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
                 ('author', models.CharField(max_length=255)),
                 ('public', models.BooleanField(default=True)),
                 ('date_posted', models.DateTimeField(verbose_name='date posted')),
-                ('post', models.ForeignKey(on_delete='', related_name='comments', to='posts.Post')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, related_name='comments', to='posts.Post')),
             ],
             options={
                 'db_table': 'comments',
