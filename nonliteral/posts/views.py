@@ -38,6 +38,19 @@ def single_post(request, pk):
     return HttpResponse(template.render(context, request))
 
 
+def search_posts(request):
+    template = loader.get_template('search_results.html')
+    search = request.GET.get("search")
+    posts = News.objects.filter(text__contains=search).order_by('-date_published')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(posts, 5)
+    blog_posts = paginator.page(page)
+    context = {
+        'posts': blog_posts,
+    }
+    return HttpResponse(template.render(context, request))
+
+
 class PostViewSet(viewsets.ModelViewSet):
     """
     API endpoint for posts.

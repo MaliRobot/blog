@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path
 from core import views as core_views
+from core.views import SearchView
 from news import views as news_views
 from about import views as about_views
 from albums import views as album_views
@@ -38,9 +39,11 @@ router.register(r'events', event_views.EventViewSet)
 urlpatterns = [
     path('', core_views.index),
     path('stavka/', admin.site.urls),
-    path('blog/<int:pk>/', post_views.single_post),
-    path('blog', post_views.blog),
+    path('flow/<int:pk>/', news_views.single_news, name='single_news'),
+    path('blog/<int:pk>/', post_views.single_post, name='single_post'),
+    path('blog', post_views.blog, name='posts'),
     path('poetry', poem_views.poems),
+    path('search', SearchView.as_view()),
     # path('releases', album_views.releases),
     path('events/<int:pk>', event_views.event),
     path('events', event_views.events),

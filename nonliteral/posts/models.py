@@ -4,10 +4,22 @@ from taggit.managers import TaggableManager
 from django.db import models
 from django.contrib.auth.models import User
 from core.helpers import RandomFileName
+from django.db.models import Q
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 
 # Create your models here.
+
+
+class PostManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(title__icontains=query) |
+                         Q(text__icontains=query)
+                        )
+            qs = qs.filter(or_lookup).distinct()
+        return qs
 
 
 class Post(ModelMeta, models.Model):
@@ -24,6 +36,8 @@ class Post(ModelMeta, models.Model):
                                       options={'quality': 60})
     date_published = models.DateTimeField('date published')
     tags = TaggableManager(blank=True)
+
+    objects = PostManager()
 
     _metadata = {
         'title': 'title',

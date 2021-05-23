@@ -1,9 +1,23 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from django.template import loader
+from django.shortcuts import render, get_object_or_404
 from .models import News
 from rest_framework import viewsets
 from .serializers import NewsSerializer
+from django.http import HttpResponse
 # Create your views here.
+
+
+def single_news(request, pk):
+    news_item = get_object_or_404(News, public=True, pk=pk)
+    news = News.objects.filter(public=True).exclude(pk=pk).order_by('-date_published')[:10]
+    template = loader.get_template('single_news.html')
+
+    context = {
+        'news_item': news_item,
+        'news': news,
+        'meta': news.as_meta(),
+    }
+    return HttpResponse(template.render(context, request))
 
 
 class NewsViewSet(viewsets.ModelViewSet):
