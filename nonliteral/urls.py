@@ -39,7 +39,7 @@ router.register(r'events', event_views.EventViewSet)
 urlpatterns = [
     path('', core_views.index),
     path('stavka/', admin.site.urls),
-    path('flow/<int:pk>/', news_views.single_news, name='single_news'),
+    path('news/<int:pk>/', news_views.single_news, name='single_news'),
     path('blog/<int:pk>/', post_views.single_post, name='single_post'),
     path('blog', post_views.blog, name='posts'),
     path('poetry', poem_views.poems),

@@ -4,6 +4,7 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
+from meta.models import ModelMeta
 
 # Create your models here.
 
@@ -19,7 +20,7 @@ class NewsManager(models.Manager):
         return qs
 
 
-class News(models.Model):
+class News(ModelMeta, models.Model):
     title = models.CharField(max_length=255)
     text = RichTextField()
     public = models.BooleanField()
@@ -33,9 +34,18 @@ class News(models.Model):
 
     objects = NewsManager()
 
+    _metadata = {
+        'title': 'title',
+        'image': 'get_meta_image',
+    }
+
     class Meta:
         verbose_name_plural = "news"
         db_table = "news"
+
+    def get_meta_image(self):
+        if self.image:
+            return self.image.url
 
     def get_absolute_url(self):
         return reverse('single_news', args=[str(self.id)])

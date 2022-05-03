@@ -52,10 +52,9 @@ class SearchView(ListView):
                 news_results,
             )
             qs = sorted(queryset_chain,
-                        key=lambda instance: instance.pk,
+                        key=lambda instance: instance.date_published,
                         reverse=True)
-            self.count = len(qs)  # since qs is actually a list
-            print(qs)
+            self.count = len(qs)
             return qs
         return Post.objects.none()  # just an empty queryset as default
 
