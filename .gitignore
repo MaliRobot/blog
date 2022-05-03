@@ -7,6 +7,9 @@
 *.jpg
 *.png
 
+# sql
+*.sql
+
 # env and virtual env
 envnon/*
 venv/*
