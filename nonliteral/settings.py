@@ -151,6 +151,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -232,6 +234,9 @@ LOCATION_FIELD = {
     'map.provider': 'openstreetmap',
     'search.provider': 'google',
 }
+
+GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH', config('GDAL_LIBRARY_PATH'))
+GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH', config('GEOS_LIBRARY_PATH'))
 
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', config('RECAPTCHA_PUBLIC_KEY'))
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', config('RECAPTCHA_PRIVATE_KEY'))
