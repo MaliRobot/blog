@@ -10,6 +10,9 @@
 # sql
 *.sql
 
+# docker volumes
+volumes/*
+
 # env and virtual env
 envnon/*
 venv/*
