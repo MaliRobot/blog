@@ -23,6 +23,5 @@ blogenv/*
 core/staticfiles/*
 nonliteral/core/media
 
-# node
-node_modules/*
+.coverage
 

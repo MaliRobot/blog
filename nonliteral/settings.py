@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'location_field.apps.DefaultConfig',
     'captcha',
     'imagekit',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -238,3 +239,8 @@ LOCATION_FIELD = {
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', config('RECAPTCHA_PUBLIC_KEY'))
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', config('RECAPTCHA_PRIVATE_KEY'))
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-coverage',
+]
