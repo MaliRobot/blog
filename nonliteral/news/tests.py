@@ -13,7 +13,7 @@ class NewsTestCase(TestCase):
         News.objects.create(
             title="test1",
             text="lorem ipsum",
-            public=0,
+            public=1,
             language='eng',
             image="/test",
             date_published=datetime.now(pytz.timezone("Europe/Zurich"))
@@ -32,3 +32,4 @@ class NewsTestCase(TestCase):
         client = APIClient()
         response = client.get('http://testserver/api/news/')
         assert response.status_code == 200
+        assert len(response.data['results']) == 1

@@ -15,7 +15,7 @@ class PoemTestCase(TestCase):
         Poem.objects.create(
             title="test1",
             text="lorem ipsum",
-            public=0,
+            public=1,
             date_created=datetime.now(pytz.timezone('Europe/Zurich')),
             author_id=user.id,
         )
@@ -32,3 +32,4 @@ class PoemTestCase(TestCase):
         client = APIClient()
         response = client.get('http://testserver/api/poems/')
         assert response.status_code == 200
+        assert len(response.data['results']) == 1
