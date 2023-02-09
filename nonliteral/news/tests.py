@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import resolve
+from rest_framework.test import APIClient
 from datetime import datetime
 import pytz
 
@@ -26,3 +27,8 @@ class NewsTestCase(TestCase):
         self.assertEqual(resolver.kwargs['pk'], news.id)
         self.assertEqual(resolver.route, 'news/<int:pk>/')
         self.assertEqual(resolver.url_name, 'single_news')
+
+    def test_api_news_get(self):
+        client = APIClient()
+        response = client.get('http://testserver/api/news/')
+        assert response.status_code == 200

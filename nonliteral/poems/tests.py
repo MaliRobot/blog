@@ -28,7 +28,7 @@ class PoemTestCase(TestCase):
         self.assertEqual(resolver.route, 'poetry/')
         self.assertEqual(resolver.url_name, 'poems')
 
-    def test_api_get(self):
+    def test_api_poems_get(self):
         client = APIClient()
         response = client.get('http://testserver/api/poems/')
         assert response.status_code == 200
