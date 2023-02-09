@@ -11,5 +11,6 @@ services:
     restart: always
     volumes:
       - ./volumes/init.sql:/data/application/init.sql
+      - ./volumes/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

@@ -235,9 +235,6 @@ LOCATION_FIELD = {
     'search.provider': 'google',
 }
 
-GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH', config('GDAL_LIBRARY_PATH'))
-GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH', config('GEOS_LIBRARY_PATH'))
-
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', config('RECAPTCHA_PUBLIC_KEY'))
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', config('RECAPTCHA_PRIVATE_KEY'))
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
