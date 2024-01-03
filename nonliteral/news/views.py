@@ -11,7 +11,6 @@ def single_news(request, pk):
     news_item = get_object_or_404(News, public=True, pk=pk)
     news = News.objects.filter(public=True).exclude(pk=pk).order_by('-date_published')[:5]
     template = loader.get_template('single_news.html')
-
     context = {
         'news_item': news_item,
         'news': news,
