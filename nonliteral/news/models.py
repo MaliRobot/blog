@@ -6,6 +6,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 from meta.models import ModelMeta
 
+
 # Create your models here.
 
 
@@ -15,7 +16,7 @@ class NewsManager(models.Manager):
         if query is not None:
             or_lookup = (Q(title__icontains=query) |
                          Q(text__icontains=query)
-                        )
+                         )
             qs = qs.filter(or_lookup).distinct()
         return qs
 
@@ -27,9 +28,9 @@ class News(ModelMeta, models.Model):
     language = models.CharField(max_length=3, default='eng')
     image = models.ImageField(upload_to='static/images/', blank=True, default=None)
     image_thumbnail = ImageSpecField(source='image',
-                                      processors=[ResizeToFit(400, 200)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+                                     processors=[ResizeToFit(400, 200)],
+                                     format='JPEG',
+                                     options={'quality': 60})
     date_published = models.DateTimeField('date published')
 
     objects = NewsManager()
@@ -52,4 +53,3 @@ class News(ModelMeta, models.Model):
 
     def __str__(self):
         return self.title
-
