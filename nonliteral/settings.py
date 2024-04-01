@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'news',
     'poems',
     'posts',
+    'story',
     'access_log',
     'admin_interface',
     'colorfield',
@@ -147,8 +148,8 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', config('DB_PORT')),
         'OPTIONS': {
             'charset': 'utf8mb4'
-        }
-    }
+        },
+    },
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
