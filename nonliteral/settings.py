@@ -22,99 +22,98 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', config('SECRET_KEY'))
+SECRET_KEY = os.getenv("SECRET_KEY", config("SECRET_KEY"))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', config('DEBUG'))
+DEBUG = os.getenv("DEBUG", config("DEBUG"))
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS')).split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", config("ALLOWED_HOSTS")).split(",")
 ALLOWED_HOSTS = [] if not any(ALLOWED_HOSTS) else ALLOWED_HOSTS
 
-INTERNAL_IPS = ['127.0.0.1', 'localhost']
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
-    'about',
-    'albums',
-    'events',
-    'images',
-    'news',
-    'poems',
-    'posts',
-    'story',
-    'access_log',
-    'admin_interface',
-    'colorfield',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'ckeditor',
-    'ckeditor_uploader',
-    'debug_toolbar',
-    'meta',
-    'taggit',
-    'leaflet',
-    'djgeojson',
-    'social_share',
-    'django_social_share',
-    'location_field.apps.DefaultConfig',
-    'captcha',
-    'imagekit',
+    "core",
+    "about",
+    "albums",
+    "events",
+    "images",
+    "news",
+    "poems",
+    "posts",
+    "story",
+    "access_log",
+    "admin_interface",
+    "colorfield",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "ckeditor",
+    "ckeditor_uploader",
+    "debug_toolbar",
+    "meta",
+    "taggit",
+    "leaflet",
+    "social_share",
+    "django_social_share",
+    "location_field.apps.DefaultConfig",
+    "django_recaptcha",
+    "imagekit",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'access_log.logging_middleware.AccessLogsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "access_log.logging_middleware.AccessLogsMiddleware",
 ]
 
 DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
+    "debug_toolbar.panels.versions.VersionsPanel",
+    "debug_toolbar.panels.timer.TimerPanel",
+    "debug_toolbar.panels.settings.SettingsPanel",
+    "debug_toolbar.panels.headers.HeadersPanel",
+    "debug_toolbar.panels.request.RequestPanel",
+    "debug_toolbar.panels.sql.SQLPanel",
+    "debug_toolbar.panels.staticfiles.StaticFilesPanel",
+    "debug_toolbar.panels.templates.TemplatesPanel",
+    "debug_toolbar.panels.cache.CachePanel",
+    "debug_toolbar.panels.signals.SignalsPanel",
+    "debug_toolbar.panels.logging.LoggingPanel",
+    "debug_toolbar.panels.redirects.RedirectsPanel",
 ]
 
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
+# DEBUG_TOOLBAR_CONFIG = {
+#     "INTERCEPT_REDIRECTS": False,
+# }
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = "urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'OPTIONS': {
-            'loaders': [
-                'django.template.loaders.app_directories.Loader',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "OPTIONS": {
+            "loaders": [
+                "django.template.loaders.app_directories.Loader",
             ],
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
@@ -132,43 +131,41 @@ TEMPLATE_DIRS = (
     'os.path.join(BASE_DIR, "posts.templates"),',
 )
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = "wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', config('DB_NAME')),
-        'USER': os.getenv('DB_USER', config('DB_USER')),
-        'PASSWORD': os.getenv('DB_PASS', config('DB_PASS')),
-        'HOST': os.getenv('DB_HOST', config('DB_HOST')),
-        'PORT': os.getenv('DB_PORT', config('DB_PORT')),
-        'OPTIONS': {
-            'charset': 'utf8mb4'
-        },
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.getenv("DB_NAME", config("DB_NAME")),
+        "USER": os.getenv("DB_USER", config("DB_USER")),
+        "PASSWORD": os.getenv("DB_PASS", config("DB_PASS")),
+        "HOST": os.getenv("DB_HOST", config("DB_HOST")),
+        "PORT": os.getenv("DB_PORT", config("DB_PORT")),
+        "OPTIONS": {"charset": "utf8mb4"},
     },
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -176,9 +173,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'CET'
+TIME_ZONE = "CET"
 
 USE_I18N = True
 
@@ -186,59 +183,73 @@ USE_L10N = True
 
 USE_TZ = True
 
-META_SITE_PROTOCOL = 'https'
-META_SITE_DOMAIN = 'nonliteral.org'
+META_SITE_PROTOCOL = "https"
+META_SITE_DOMAIN = "nonliteral.org"
 META_USE_OG_PROPERTIES = True
 META_USE_TWITTER_PROPERTIES = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'nonliteral/core/static')
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "nonliteral/core/static")
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'nonliteral/core/media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "nonliteral/core/media")
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10,
 }
 
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 CKEDITOR_CONFIGS = {
-   'default': {
-       'toolbar_Full': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule', 'Iframe'],
-            ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], ['Source'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['NumberedList', 'BulletedList'],
-            ['Indent', 'Outdent'],
-            ['Maximize'],
-        ], 'extraPlugins': 'justify, liststyle, indent',
-   },
+    "default": {
+        "toolbar_Full": [
+            [
+                "Styles",
+                "Format",
+                "Bold",
+                "Italic",
+                "Underline",
+                "Strike",
+                "SpellChecker",
+                "Undo",
+                "Redo",
+            ],
+            ["Link", "Unlink", "Anchor"],
+            ["Image", "Flash", "Table", "HorizontalRule", "Iframe"],
+            ["TextColor", "BGColor"],
+            ["Smiley", "SpecialChar"],
+            ["Source"],
+            ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"],
+            ["NumberedList", "BulletedList"],
+            ["Indent", "Outdent"],
+            ["Maximize"],
+        ],
+        "extraPlugins": "justify, liststyle, indent",
+    },
 }
 
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (44.787197, 20.457273),
-    'DEFAULT_ZOOM': 1,
-    'MIN_ZOOM': 10,
-    'MAX_ZOOM': 18,
+    "DEFAULT_CENTER": (44.787197, 20.457273),
+    "DEFAULT_ZOOM": 1,
+    "MIN_ZOOM": 10,
+    "MAX_ZOOM": 18,
 }
 
 LOCATION_FIELD = {
-    'map.provider': 'openstreetmap',
-    'search.provider': 'google',
+    "map.provider": "openstreetmap",
+    "search.provider": "google",
 }
 
-GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH', config('GDAL_LIBRARY_PATH'))
-GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH', config('GEOS_LIBRARY_PATH'))
+GDAL_LIBRARY_PATH = os.getenv("GDAL_LIBRARY_PATH", config("GDAL_LIBRARY_PATH"))
+GEOS_LIBRARY_PATH = os.getenv("GEOS_LIBRARY_PATH", config("GEOS_LIBRARY_PATH"))
 
-RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', config('RECAPTCHA_PUBLIC_KEY'))
-RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', config('RECAPTCHA_PRIVATE_KEY'))
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", config("RECAPTCHA_PUBLIC_KEY"))
+RECAPTCHA_PRIVATE_KEY = os.getenv(
+    "RECAPTCHA_PRIVATE_KEY", config("RECAPTCHA_PRIVATE_KEY")
+)
+SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
