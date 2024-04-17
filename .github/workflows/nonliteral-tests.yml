@@ -25,4 +25,5 @@ jobs:
 
       - name: Run Django tests
         run: |
+          cd blog
           python manage.py test
