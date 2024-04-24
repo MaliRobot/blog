@@ -39,7 +39,7 @@ router.register(r"events", event_views.EventViewSet)
 
 urlpatterns = [
     path("", core_views.index),
-    path("admin/", admin.site.urls),
+    path("stavka/", admin.site.urls),
     path("news/<int:pk>/", news_views.single_news, name="single_news"),
     path("blog/<int:pk>/", post_views.single_post, name="single_post"),
     path("blog", post_views.blog, name="posts"),
@@ -57,9 +57,9 @@ handler404 = "core.views.error_404_view"
 handler500 = "core.views.error_505_view"
 
 
-# if settings.DEBUG:
-import debug_toolbar
+if settings.DEBUG:
+    import debug_toolbar
 
-urlpatterns += [
-    path("__debug__/", include(debug_toolbar.urls)),
-]
+    urlpatterns += [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ]

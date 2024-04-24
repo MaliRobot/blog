@@ -13,6 +13,7 @@ from meta.models import ModelMeta
 class NewsManager(models.Manager):
     def search(self, query=None):
         qs = self.get_queryset()
+        # TODO split and search each term
         if query is not None:
             or_lookup = (Q(title__icontains=query) |
                          Q(text__icontains=query)

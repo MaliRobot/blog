@@ -95,9 +95,9 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.redirects.RedirectsPanel",
 ]
 
-# DEBUG_TOOLBAR_CONFIG = {
-#     "INTERCEPT_REDIRECTS": False,
-# }
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
 
 ROOT_URLCONF = "urls"
 
