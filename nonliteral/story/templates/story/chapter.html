@@ -1,0 +1,64 @@
+<!-- templates/story/chapter.html -->
+{% extends 'story/base.html' %}
+
+{% block title %}{{ chapter.title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title mb-4">{{ chapter.title }}</h2>
+                <div class="story-text mb-4">
+                    {{ chapter.text|linebreaks }}
+                </div>
+
+                {% if is_terminal %}
+                    <div class="alert alert-success">
+                        <h4>The End</h4>
+                        <p>You've reached the end of this story path!</p>
+                        <a href="{% url 'story:reset_adventure' %}" class="btn btn-primary">Start New Adventure</a>
+                    </div>
+                {% else %}
+                    <hr>
+                    <h4 class="mb-3">What will you do?</h4>
+                    <div class="row">
+                        {% for choice in choices %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card choice-card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ choice.text }}</h5>
+                                        <div class="mb-3">
+                                            {% if choice.money_cost < 0 %}
+                                                <span class="badge bg-danger">💰 -{{ choice.money_cost|abs }}</span>
+                                            {% elif choice.money_cost > 0 %}
+                                                <span class="badge bg-success">💰 +{{ choice.money_cost }}</span>
+                                            {% endif %}
+
+                                            {% if choice.energy_cost < 0 %}
+                                                <span class="badge bg-warning">⚡ -{{ choice.energy_cost|abs }}</span>
+                                            {% elif choice.energy_cost > 0 %}
+                                                <span class="badge bg-info">⚡ +{{ choice.energy_cost }}</span>
+                                            {% endif %}
+                                        </div>
+                                        <form method="post" action="{% url 'story:make_choice' choice.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-primary w-100">Choose</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    No choices available. You might not have enough resources.
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

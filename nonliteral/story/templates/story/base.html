@@ -1,0 +1,70 @@
+<!-- templates/story/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Text Adventure{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .stats-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 0 0 0 10px;
+            z-index: 1000;
+        }
+        .choice-card {
+            transition: transform 0.2s;
+        }
+        .choice-card:hover {
+            transform: translateY(-5px);
+        }
+        .story-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <div class="stats-bar">
+        <div>💰 Money: <span id="user-money">{{ user.money }}</span></div>
+        <div>⚡ Energy: <span id="user-energy">{{ user.energy }}</span></div>
+    </div>
+    {% endif %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'story:current_chapter' %}">Text Adventure</a>
+            <div class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'story:profile' %}">Profile</a>
+                    <a class="nav-link" href="{% url 'story:logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'story:login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'story:signup' %}">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
