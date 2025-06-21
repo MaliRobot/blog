@@ -1,32 +1,28 @@
 <!-- story/templates/story/restart_confirm.html -->
 {% extends 'story/base.html' %}
 
-{% block title %}Restart Story{% endblock %}
+{% block title %}Restart Story - Story Adventure{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h4>🔄 Restart Story</h4>
-            </div>
-            <div class="card-body">
-                <div class="alert alert-warning">
-                    <h5>⚠️ Are you sure?</h5>
-                    <p>This will reset your progress and stats:</p>
-                    <ul>
-                        <li>Money will reset to 100</li>
-                        <li>Energy will reset to 100</li>
-                        <li>You'll return to the first chapter</li>
-                        <li>Your progress history will remain</li>
-                    </ul>
-                </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body text-center py-4">
+                    <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                    <h3>Restart Your Adventure?</h3>
+                    <p>This will reset all your progress and stats back to the beginning.</p>
 
-                <form method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-warning me-2">Yes, Restart Story</button>
-                    <a href="{% url 'story:dashboard' %}" class="btn btn-secondary">Cancel</a>
-                </form>
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-redo"></i> Yes, Restart
+                        </button>
+                        <a href="{% url 'story:dashboard' %}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

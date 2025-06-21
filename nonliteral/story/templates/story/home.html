@@ -1,48 +1,56 @@
 <!-- story/templates/story/home.html -->
 {% extends 'story/base.html' %}
 
-{% block title %}Welcome to Story Adventure{% endblock %}
+{% block title %}Welcome - Story Adventure{% endblock %}
 
 {% block content %}
-<div class="jumbotron bg-primary text-white p-5 rounded mb-4">
-    <h1 class="display-4">Welcome to Story Adventure! 🎭</h1>
-    <p class="lead">Embark on an interactive journey where your choices shape your destiny.</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center py-5">
+                <h1 class="display-4 mb-4">Welcome to Story Adventure</h1>
+                <p class="lead mb-5">
+                    Embark on an interactive journey where your choices shape your destiny.
+                    Manage your resources wisely as you navigate through challenging decisions.
+                </p>
 
-    {% if is_reader_logged_in %}
-        <hr class="my-4">
-        <p>Welcome back, {{ reader.get_full_name }}! Ready to continue your adventure?</p>
-        <a class="btn btn-light btn-lg" href="{% url 'story:dashboard' %}" role="button">Go to Dashboard</a>
-        <a class="btn btn-outline-light btn-lg" href="{% url 'story:chapter_detail' %}" role="button">Continue Story</a>
-    {% else %}
-        <hr class="my-4">
-        <p>Create an account or login to start your adventure!</p>
-        <a class="btn btn-light btn-lg" href="{% url 'story:reader_signup' %}" role="button">Start Adventure</a>
-        <a class="btn btn-outline-light btn-lg" href="{% url 'story:reader_login' %}" role="button">Login</a>
-    {% endif %}
-</div>
+                {% if request.reader %}
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="{% url 'story:dashboard' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                        </a>
+                        <a href="{% url 'story:chapter_detail' %}" class="btn btn-success btn-lg">
+                            <i class="fas fa-play"></i> Continue Adventure
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="{% url 'story:reader_signup' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-rocket"></i> Start Your Adventure
+                        </a>
+                        <a href="{% url 'story:reader_login' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">🎯 Make Choices</h5>
-                <p class="card-text">Every decision you make affects your story and character stats.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">💰 Manage Resources</h5>
-                <p class="card-text">Keep track of your money and energy as you progress through the story.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">📖 Multiple Endings</h5>
-                <p class="card-text">Discover different endings based on the path you choose.</p>
+            <div class="row mt-5">
+                <div class="col-md-4 text-center mb-4">
+                    <i class="fas fa-book fa-3x text-primary mb-3"></i>
+                    <h4>Rich Storytelling</h4>
+                    <p>Immerse yourself in captivating narratives with multiple branching paths.</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <i class="fas fa-dice fa-3x text-success mb-3"></i>
+                    <h4>Meaningful Choices</h4>
+                    <p>Every decision matters and affects your resources and story outcome.</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                    <h4>Multiple Endings</h4>
+                    <p>Discover different conclusions based on the path you choose.</p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,45 +1,46 @@
 <!-- story/templates/story/ending.html -->
 {% extends 'story/base.html' %}
 
-{% block title %}{{ chapter.title }} - Ending{% endblock %}
+{% block title %}The End - Story Adventure{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1>🎊 {{ chapter.title }} 🎊</h1>
-</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-trophy fa-5x text-warning mb-4"></i>
+                    <h1 class="display-4">Congratulations!</h1>
+                    <p class="lead">You've completed the story!</p>
 
-<div class="story-text">
-    {{ chapter.text|linebreaks }}
-</div>
+                    <hr class="my-4">
 
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5>📊 Final Stats</h5>
-            </div>
-            <div class="card-body">
-                <p><strong>💰 Final Money:</strong> {{ final_stats.money }}</p>
-                <p><strong>⚡ Final Energy:</strong> {{ final_stats.energy }}</p>
-                <p><strong>🏆 Achievement:</strong> Reached "{{ chapter.title }}" ending</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5>🎮 What's Next?</h5>
-            </div>
-            <div class="card-body">
-                <a href="{% url 'story:restart' %}" class="btn btn-primary btn-lg w-100 mb-2">
-                    🔄 Start New Adventure
-                </a>
-                <a href="{% url 'story:progress_history' %}" class="btn btn-outline-primary w-100 mb-2">
-                    📈 View Progress History
-                </a>
-                <a href="{% url 'story:dashboard' %}" class="btn btn-outline-secondary w-100">
-                    🏠 Dashboard
-                </a>
+                    <h3>{{ chapter.title }}</h3>
+                    <div class="chapter-content text-start my-4">
+                        {{ chapter.text|linebreaks }}
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h4>Final Stats</h4>
+                    <div class="d-inline-flex gap-3">
+                        <div class="stat-badge bg-warning text-dark">
+                            <i class="fas fa-coins"></i> Money: {{ final_stats.money }}
+                        </div>
+                        <div class="stat-badge bg-info text-white">
+                            <i class="fas fa-bolt"></i> Energy: {{ final_stats.energy }}
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="{% url 'story:restart' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-redo"></i> Play Again
+                        </a>
+                        <a href="{% url 'story:dashboard' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-home"></i> Dashboard
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
