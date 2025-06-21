@@ -1,0 +1,134 @@
+<!-- story/templates/story/chapter_detail.html -->
+{% extends 'story/base.html' %}
+
+{% block title %}{{ chapter.title }}{% endblock %}
+
+{% block content %}
+<!-- Stats Bar -->
+<div class="stats-bar">
+    <div class="row">
+        <div class="col-md-3">
+            <strong>💰 Money: {{ reader.money }}</strong>
+        </div>
+        <div class="col-md-3">
+            <strong>⚡ Energy: {{ reader.energy }}</strong>
+        </div>
+        <div class="col-md-3">
+            <strong>📍 Chapter: {{ chapter.title }}</strong>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'story:dashboard' %}" class="btn btn-outline-light btn-sm">Dashboard</a>
+        </div>
+    </div>
+</div>
+
+<!-- Chapter Content -->
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{ chapter.title }}</h1>
+        <div class="story-text">
+            {{ chapter.text|linebreaks }}
+        </div>
+    </div>
+</div>
+
+<!-- Choices -->
+{% if not is_terminal %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>What do you choose? 🤔</h3>
+
+            {% if available_choices %}
+                <form method="post" action="{% url 'story:make_choice' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for choice in available_choices %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card choice-card h-100" onclick="selectChoice({{ choice.id }})">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ choice.name }}</h5>
+                                    {% if choice.description %}
+                                        <p class="card-text">{{ choice.description }}</p>
+                                    {% endif %}
+                                    <div class="mt-auto">
+                                        {% if choice.money_cost != 0 %}
+                                            <span class="badge bg-{% if choice.money_cost > 0 %}danger{% else %}success{% endif %}">
+                                                💰 {{ choice.money_cost|floatformat:"+0" }}
+                                            </span>
+                                        {% endif %}
+                                        {% if choice.energy_cost != 0 %}
+                                            <span class="badge bg-{% if choice.energy_cost > 0 %}danger{% else %}success{% endif %}">
+                                                ⚡ {{ choice.energy_cost|floatformat:"+0" }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <input type="radio" name="choice_id" value="{{ choice.id }}" style="display: none;" id="choice_{{ choice.id }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" id="submit-choice" disabled>
+                        Make Choice ✨
+                    </button>
+                </form>
+            {% endif %}
+
+            {% if unavailable_choices %}
+                <h4 class="mt-4 text-muted">Unavailable Choices 🚫</h4>
+                <div class="row">
+                    {% for choice in unavailable_choices %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card choice-unavailable h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">{{ choice.name }}</h5>
+                                {% if choice.description %}
+                                    <p class="card-text text-muted">{{ choice.description }}</p>
+                                {% endif %}
+                                <div class="mt-auto">
+                                    <span class="badge bg-secondary">Insufficient resources</span>
+                                    {% if choice.money_cost > 0 %}
+                                        <span class="badge bg-danger">💰 -{{ choice.money_cost }}</span>
+                                    {% endif %}
+                                    {% if choice.energy_cost > 0 %}
+                                        <span class="badge bg-danger">⚡ -{{ choice.energy_cost }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <!-- Terminal Chapter -->
+    <div class="alert alert-success">
+        <h4>🎉 The End!</h4>
+        <p>You've reached the end of this story path. Congratulations!</p>
+        <a href="{% url 'story:restart' %}" class="btn btn-success">Start New Adventure</a>
+        <a href="{% url 'story:dashboard' %}" class="btn btn-outline-success">Dashboard</a>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+function selectChoice(choiceId) {
+    // Deselect all choices
+    document.querySelectorAll('input[name="choice_id"]').forEach(radio => {
+        radio.checked = false;
+        radio.closest('.card').classList.remove('border-primary');
+    });
+
+    // Select clicked choice
+    const selectedRadio = document.getElementById('choice_' + choiceId);
+    selectedRadio.checked = true;
+    selectedRadio.closest('.card').classList.add('border-primary');
+
+    // Enable submit button
+    document.getElementById('submit-choice').disabled = false;
+}
+</script>
+{% endblock %}

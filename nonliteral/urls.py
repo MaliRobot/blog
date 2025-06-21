@@ -26,6 +26,7 @@ from albums import views as album_views
 from events import views as event_views
 from poems import views as poem_views
 from posts import views as post_views
+from story import views as story_views
 from django.conf.urls.static import static
 from django.conf.urls import handler404, handler500
 from rest_framework import routers
@@ -45,6 +46,7 @@ urlpatterns = [
     path("blog", post_views.blog, name="posts"),
     path("poetry", poem_views.poems),
     path("search", SearchView.as_view()),
+    path("story/", include("story.urls")),
     # path('releases', album_views.releases),
     path("events/<int:pk>", event_views.event),
     path("events", event_views.events),

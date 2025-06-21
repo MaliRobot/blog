@@ -69,15 +69,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "access_log.logging_middleware.AccessLogsMiddleware",
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'story.middleware.ReaderAuthMiddleware',  # Add this after AuthenticationMiddleware
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 DEBUG_TOOLBAR_PANELS = [
@@ -253,3 +252,7 @@ RECAPTCHA_PRIVATE_KEY = os.getenv(
     "RECAPTCHA_PRIVATE_KEY", config("RECAPTCHA_PRIVATE_KEY")
 )
 SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
+
+LOGIN_URL = '/story/login/'
+LOGIN_REDIRECT_URL = '/story/dashboard/'
+LOGOUT_REDIRECT_URL = '/story/'

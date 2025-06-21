@@ -1,0 +1,71 @@
+{% extends 'story/base.html' %}
+
+{% block title %}Progress History{% endblock %}
+
+{% block content %}
+<h2>📊 Your Adventure History</h2>
+
+<div class="stats-bar">
+    <div class="row">
+        <div class="col-md-4">
+            <strong>💰 Current Money: {{ reader.money }}</strong>
+        </div>
+        <div class="col-md-4">
+            <strong>⚡ Current Energy: {{ reader.energy }}</strong>
+        </div>
+        <div class="col-md-4">
+            <strong>📍 Current Chapter: {{ reader.current_chapter.title|default:"Not started" }}</strong>
+        </div>
+    </div>
+</div>
+
+{% if progress %}
+<div class="card">
+    <div class="card-header">
+        <h5>🗓️ Progress Timeline</h5>
+    </div>
+    <div class="card-body">
+        {% for entry in progress %}
+        <div class="d-flex justify-content-between align-items-start border-bottom py-3">
+            <div>
+                <h6 class="mb-1">{{ entry.chapter.title }}</h6>
+                {% if entry.choice_made %}
+                    <p class="mb-1"><strong>Choice:</strong> {{ entry.choice_made.name }}</p>
+                    {% if entry.choice_made.description %}
+                        <p class="mb-1 text-muted">{{ entry.choice_made.description }}</p>
+                    {% endif %}
+                    <div>
+                        {% if entry.choice_made.money_cost != 0 %}
+                            <span class="badge bg-{% if entry.choice_made.money_cost > 0 %}danger{% else %}success{% endif %}">
+                                💰 {{ entry.choice_made.money_cost|floatformat:"+0" }}
+                            </span>
+                        {% endif %}
+                        {% if entry.choice_made.energy_cost != 0 %}
+                            <span class="badge bg-{% if entry.choice_made.energy_cost > 0 %}danger{% else %}success{% endif %}">
+                                ⚡ {{ entry.choice_made.energy_cost|floatformat:"+0" }}
+                            </span>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p class="mb-1 text-muted">Chapter visited</p>
+                {% endif %}
+            </div>
+            <div class="text-end">
+                <small class="text-muted">{{ entry.timestamp|date:"M d, Y H:i" }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">
+    <h5>📝 No Progress Yet</h5>
+    <p>Start your adventure to see your progress history here!</p>
+    <a href="{% url 'story:chapter_detail' %}" class="btn btn-primary">Start Adventure</a>
+</div>
+{% endif %}
+
+<div class="mt-3">
+    <a href="{% url 'story:dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
+</div>
+{% endblock %}
