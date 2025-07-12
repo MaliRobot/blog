@@ -1,0 +1,48 @@
+<!-- story/templates/story/ending.html -->
+{% extends 'story/base.html' %}
+
+{% block title %}The End - Story Adventure{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-trophy fa-5x text-warning mb-4"></i>
+                    <h1 class="display-4">Congratulations!</h1>
+                    <p class="lead">You've completed the story!</p>
+
+                    <hr class="my-4">
+
+                    <h3>{{ chapter.title }}</h3>
+                    <div class="chapter-content text-start my-4">
+                        {{ chapter.text|linebreaks }}
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h4>Final Stats</h4>
+                    <div class="d-inline-flex gap-3">
+                        <div class="stat-badge bg-warning text-dark">
+                            <i class="fas fa-coins"></i> Money: {{ final_stats.money }}
+                        </div>
+                        <div class="stat-badge bg-info text-white">
+                            <i class="fas fa-bolt"></i> Energy: {{ final_stats.energy }}
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="{% url 'story:restart' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-redo"></i> Play Again
+                        </a>
+                        <a href="{% url 'story:dashboard' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-home"></i> Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

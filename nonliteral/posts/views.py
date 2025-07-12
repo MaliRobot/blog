@@ -1,9 +1,14 @@
-from django.shortcuts import render
+import re
+
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.db.models import Q, Func, F, Value, TextField
+from django.forms import CharField
+
 from .models import Post
 from news.models import News
 from django.http import HttpResponse
 from django.template import loader
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from rest_framework import viewsets
 from .serializers import PostSerializer
@@ -39,9 +44,19 @@ def single_post(request, pk):
 
 
 def search_posts(request):
-    template = loader.get_template('search_results.html')
-    search = request.GET.get("search")
-    posts = News.objects.filter(text__contains=search).order_by('-date_published')
+    template = loader.get_template('post_search_results.html')
+    search = request.GET.get("q")
+    if search:
+        search_terms = search.split()
+        query = Q()
+        for term in search_terms:
+            query |= Q(title__icontains=term) | Q(text__icontains=term)
+
+        posts = Post.objects.filter(
+            query
+        ).order_by('-date_published')
+    else:
+        posts = Post.objects.none()
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)
     blog_posts = paginator.page(page)

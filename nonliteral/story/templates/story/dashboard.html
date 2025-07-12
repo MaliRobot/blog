@@ -1,0 +1,92 @@
+<!-- story/templates/story/dashboard.html -->
+{% extends 'story/base.html' %}
+
+{% block title %}Dashboard - Story Adventure{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Player Stats</h5>
+                    <hr>
+                    <div class="mb-3">
+                        <div class="stat-badge bg-warning text-dark mb-2 w-100">
+                            <i class="fas fa-coins"></i>
+                            Money: {{ reader.money }}
+                        </div>
+                        <div class="stat-badge bg-info text-white w-100">
+                            <i class="fas fa-bolt"></i>
+                            Energy: {{ reader.energy }}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <p><strong>Username:</strong> {{ reader.username }}</p>
+                    <p><strong>Full Name:</strong> {{ reader.get_full_name }}</p>
+                    <p><strong>Joined:</strong> {{ reader.date_joined|date:"M d, Y" }}</p>
+
+                    {% if reader.current_chapter %}
+                        <hr>
+                        <p><strong>Current Chapter:</strong><br>{{ reader.current_chapter.title }}</p>
+                        <a href="{% url 'story:chapter_detail' %}" class="btn btn-success w-100">
+                            <i class="fas fa-play"></i> Continue Story
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Progress</h5>
+                    <hr>
+
+                    {% if recent_progress %}
+                        <div class="progress-container">
+                            {% for progress in recent_progress %}
+                                <div class="progress-item">
+                                    <small class="text-muted">{{ progress.timestamp|date:"M d, Y H:i" }}</small>
+                                    <p class="mb-1"><strong>{{ progress.chapter.title }}</strong></p>
+                                    {% if progress.choice_made %}
+                                        <p class="mb-0 text-muted">Choice: {{ progress.choice_made.name }}</p>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <a href="{% url 'story:progress_history' %}" class="btn btn-outline-primary mt-3">
+                            View Full History
+                        </a>
+                    {% else %}
+                        <p class="text-muted">No progress yet. Start your adventure!</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Actions</h5>
+                    <hr>
+                    <div class="d-grid gap-2 d-md-block">
+                        {% if can_continue %}
+                            <a href="{% url 'story:chapter_detail' %}" class="btn btn-primary">
+                                <i class="fas fa-book"></i> Continue Reading
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'story:restart' %}" class="btn btn-warning">
+                            <i class="fas fa-redo"></i> Restart Story
+                        </a>
+                        <a href="{% url 'story:progress_history' %}" class="btn btn-info">
+                            <i class="fas fa-history"></i> View History
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

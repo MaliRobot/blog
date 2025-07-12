@@ -13,6 +13,7 @@
 # env and virtual env
 envnon/*
 venv/*
+.venv/*
 blogenv/*
 .env
 

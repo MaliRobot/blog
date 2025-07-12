@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load class_name %}
+{% block content %}
+<h1>dksjjdkjs</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class='row title-row my-5'>
+            <div class='col-12 py-0'>
+                <h3 class='my-0 py-0'>{{ count }} results for <b>{{ query }}</b></h3>
+            </div>
+        </div>
+    </div>
+    <div>
+         {% for post in posts %}
+           <div class='row'>
+             <div class='col-12'>
+                Post: <a href='{{ post.get_absolute_url }}'>{{ post.title }}</a>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

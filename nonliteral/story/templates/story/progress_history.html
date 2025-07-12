@@ -1,0 +1,61 @@
+<!-- story/templates/story/progress_history.html -->
+{% extends 'story/base.html' %}
+
+{% block title %}Progress History - Story Adventure{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="mb-4">Your Adventure History</h2>
+
+            {% if progress %}
+                <div class="timeline">
+                    {% for item in progress %}
+                        <div class="card shadow mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h5 class="card-title">{{ item.chapter.title }}</h5>
+                                        {% if item.choice_made %}
+                                            <p class="mb-1">
+                                                <strong>Choice:</strong> {{ item.choice_made.name }}
+                                            </p>
+                                            {% if item.choice_made.money_cost != 0 or item.choice_made.energy_cost != 0 %}
+                                                <p class="mb-0">
+                                                    <strong>Cost:</strong>
+                                                    {% if item.choice_made.money_cost != 0 %}
+                                                        <span class="badge bg-warning text-dark">
+                                                            Money: {{ item.choice_made.money_cost }}
+                                                        </span>
+                                                    {% endif %}
+                                                    {% if item.choice_made.energy_cost != 0 %}
+                                                        <span class="badge bg-info">
+                                                            Energy: {{ item.choice_made.energy_cost }}
+                                                        </span>
+                                                    {% endif %}
+                                                </p>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted">{{ item.timestamp|date:"M d, Y H:i" }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> No progress recorded yet. Start your adventure!
+                </div>
+            {% endif %}
+
+            <div class="mt-4">
+                <a href="{% url 'story:dashboard' %}" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
