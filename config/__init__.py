@@ -1,0 +1,1 @@
+# This is the main configuration package for the blog project

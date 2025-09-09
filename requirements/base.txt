@@ -1,0 +1,49 @@
+# Base requirements for all environments
+# Django
+Django==4.2.7
+django-environ==0.11.2
+python-decouple==3.8
+
+# Database
+psycopg2-binary==2.9.9
+
+# Forms and Admin
+django-admin-interface==0.26.1
+django-colorfield==0.10.1
+django-ckeditor==6.7.0
+
+# REST API
+djangorestframework==3.14.0
+django-cors-headers==4.3.0
+
+# Authentication
+django-allauth==0.58.2
+
+# Image handling
+Pillow==10.1.0
+django-imagekit==5.0.0
+
+# Utilities
+django-extensions==3.2.3
+django-taggit==5.0.1
+django-leaflet==0.29.0
+django-location-field==2.7.2
+django-recaptcha==4.0.0
+django-meta==2.3.0
+
+# Social sharing
+django-social-share==2.3.0
+
+# Caching
+django-redis==5.4.0
+redis==5.0.1
+hiredis==2.2.3
+
+# Task queue (optional)
+celery==5.3.4
+
+# Timezone support
+pytz==2023.3.post1
+
+# Environment and configuration
+python-dotenv==1.0.0
