@@ -41,7 +41,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'meta',
     'taggit',
     'leaflet',
@@ -57,6 +57,7 @@ LOCAL_APPS = [
     'apps.albums',
     'apps.events',
     'apps.news',
+    'apps.images',
     'apps.poems',
     'apps.blog',  # renamed from posts for clarity
     'apps.story',

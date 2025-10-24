@@ -54,11 +54,11 @@ CACHES = {
 }
 
 # Django extensions (useful for development)
-try:
-    import django_extensions
-    INSTALLED_APPS += ['django_extensions']
-except ImportError:
-    pass
+# try:
+#     import django_extensions
+#     INSTALLED_APPS += ['django_extensions']
+# except ImportError:
+#     pass
 
 # Allow all origins in development (for CORS)
 CORS_ALLOW_ALL_ORIGINS = True

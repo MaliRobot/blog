@@ -1,5 +1,5 @@
 from django.db import models
-from core.helpers import RandomFileName
+from apps.core.helpers import RandomFileName
 
 # Create your models here.
 

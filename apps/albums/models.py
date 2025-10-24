@@ -1,5 +1,5 @@
 from django.db import models
-from images.models import Image
+from apps.images.models import Image
 # Create your models here.
 
 
