@@ -63,10 +63,19 @@ CACHES = {
 # Allow all origins in development (for CORS)
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Logging - More verbose in development
-LOGGING['handlers']['console']['level'] = 'DEBUG'
-LOGGING['loggers']['django']['level'] = 'DEBUG'
-LOGGING['loggers']['apps']['level'] = 'DEBUG'
+# Logging - More verbose in development by default. Allow override via env for Docker noise control.
+import os
+_DJANGO_LOG_LEVEL = os.environ.get('DJANGO_LOG_LEVEL', 'DEBUG')
+_DJANGO_SERVER_LOG_LEVEL = os.environ.get('DJANGO_SERVER_LOG_LEVEL', 'WARNING')
+LOGGING['handlers']['console']['level'] = _DJANGO_LOG_LEVEL
+LOGGING['loggers']['django']['level'] = _DJANGO_LOG_LEVEL
+LOGGING['loggers']['apps']['level'] = _DJANGO_LOG_LEVEL
+# Reduce noisy runserver request logs in development unless explicitly overridden
+LOGGING['loggers']['django.server'] = {
+    'handlers': ['console'],
+    'level': _DJANGO_SERVER_LOG_LEVEL,
+    'propagate': False,
+}
 
 # Static files
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
@@ -80,3 +89,6 @@ SECURE_SSL_REDIRECT = False
 # Session settings for development
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
+
+# Silence system check for django_recaptcha test keys in development
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']

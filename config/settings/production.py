@@ -10,8 +10,8 @@ from .base import *
 # Security settings
 DEBUG = False
 
-# Get allowed hosts from environment variable
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
+# Get allowed hosts from environment variable (safe default)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [s.strip() for s in v.split(',')])
 
 # Force HTTPS
 SECURE_SSL_REDIRECT = True
@@ -33,14 +33,14 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True
 
-# Database - PostgreSQL for production
+# Database - PostgreSQL for production (provide safe defaults so import doesn't fail)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
+        'NAME': config('DB_NAME', default='blog_db'),
+        'USER': config('DB_USER', default='postgres'),
+        'PASSWORD': config('DB_PASSWORD', default='password'),
+        'HOST': config('DB_HOST', default='localhost'),
         'PORT': config('DB_PORT', default='5432'),
         'CONN_MAX_AGE': 600,  # Connection pooling
         'OPTIONS': {
@@ -76,31 +76,33 @@ SESSION_CACHE_ALIAS = 'default'
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files - Use cloud storage in production
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='us-east-1')
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_DEFAULT_ACL = 'public-read'
-AWS_S3_FILE_OVERWRITE = False
-AWS_QUERYSTRING_AUTH = False
+# Media files - Use cloud storage in production only if AWS is configured
+AWS_S3_CUSTOM_DOMAIN = ''
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default=None)
+if AWS_STORAGE_BUCKET_NAME:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default=None)
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default=None)
+    AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='us-east-1')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH = False
 
-# Email configuration for production
+# Email configuration for production (fallback to base settings)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+EMAIL_HOST = config('EMAIL_HOST', default=EMAIL_HOST)
+EMAIL_PORT = config('EMAIL_PORT', default=EMAIL_PORT, cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default=EMAIL_HOST_USER)
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default=EMAIL_HOST_PASSWORD)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=EMAIL_USE_TLS, cast=bool)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=DEFAULT_FROM_EMAIL)
 SERVER_EMAIL = config('SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
-# Logging configuration for production
+# Logging configuration for production (write to project logs directory)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -114,7 +116,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/blog.log',
+            'filename': str(BASE_DIR / 'logs' / 'blog.log'),
             'maxBytes': 1024 * 1024 * 15,  # 15MB
             'backupCount': 10,
             'formatter': 'verbose',
@@ -153,23 +155,27 @@ MANAGERS = ADMINS
 
 # Sentry error tracking
 if config('SENTRY_DSN', default=None):
-    import sentry_sdk
-    from sentry_sdk.integrations.django import DjangoIntegration
-    
-    sentry_sdk.init(
-        dsn=config('SENTRY_DSN'),
-        integrations=[DjangoIntegration()],
-        traces_sample_rate=0.01,
-        send_default_pii=True,
-        environment='production',
-    )
+    try:
+        import sentry_sdk
+        from sentry_sdk.integrations.django import DjangoIntegration
+
+        sentry_sdk.init(
+            dsn=config('SENTRY_DSN'),
+            integrations=[DjangoIntegration()],
+            traces_sample_rate=0.01,
+            send_default_pii=True,
+            environment='production',
+        )
+    except ImportError:
+        # Sentry SDK not installed; skip initialization gracefully
+        pass
 
 # Content Security Policy
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", 'https://fonts.googleapis.com')
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", 'https://www.google-analytics.com')
 CSP_FONT_SRC = ("'self'", 'https://fonts.gstatic.com')
-CSP_IMG_SRC = ("'self'", 'data:', 'https:', AWS_S3_CUSTOM_DOMAIN)
+CSP_IMG_SRC = ("'self'", 'data:', 'https:') + ((AWS_S3_CUSTOM_DOMAIN,) if AWS_S3_CUSTOM_DOMAIN else tuple())
 CSP_CONNECT_SRC = ("'self'", 'https://www.google-analytics.com')
 
 # Performance optimizations

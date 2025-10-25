@@ -2,9 +2,9 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.template import loader
 from django.shortcuts import render
-from news.models import News
-from posts.models import Post
-from events.models import Event
+from apps.news.models import News
+from apps.posts.models import Post
+from apps.events.models import Event
 from django.views.generic import ListView
 import datetime
 from itertools import chain
@@ -67,3 +67,30 @@ def error_404_view(request, exception):
 def error_505_view(request):
     template = loader.get_template('error505.html')
     return HttpResponse(template.render({}, request))
+
+
+
+def error_404(request, exception):
+    """Custom 404 error handler compatible with Django's handler404."""
+    template = loader.get_template('error404.html')
+    return HttpResponse(template.render({}, request), status=404)
+
+
+def error_500(request):
+    """Custom 500 error handler compatible with Django's handler500."""
+    # Reuse existing 505 template for server errors if that's what's available
+    try:
+        template = loader.get_template('error505.html')
+        return HttpResponse(template.render({}, request), status=500)
+    except Exception:
+        return HttpResponse('Server Error', status=500)
+
+
+def error_403(request, exception):
+    """Custom 403 error handler compatible with Django's handler403."""
+    return HttpResponse('Forbidden', status=403)
+
+
+def error_400(request, exception):
+    """Custom 400 error handler compatible with Django's handler400."""
+    return HttpResponse('Bad Request', status=400)

@@ -55,8 +55,18 @@ COPY requirements/production.txt /app/requirements.txt
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+# Install runtime tools for entrypoint (bash + netcat)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    netcat-openbsd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Copy application code
 COPY . /app/
+
+# Copy entrypoint script and make it executable
+COPY scripts/entrypoint.sh /app/scripts/entrypoint.sh
+RUN chmod +x /app/scripts/entrypoint.sh
 
 # Create necessary directories and set permissions
 RUN mkdir -p /app/logs /app/media /app/staticfiles && \
@@ -64,7 +74,7 @@ RUN mkdir -p /app/logs /app/media /app/staticfiles && \
     useradd -r -g django django && \
     chown -R django:django /app
 
-# Collect static files
+# Collect static files at build time (safe; no DB required)
 RUN python manage.py collectstatic --noinput
 
 # Switch to non-root user
@@ -72,6 +82,9 @@ USER django
 
 # Expose port
 EXPOSE 8000
+
+# Set entrypoint to run migrations at container startup and then start gunicorn
+ENTRYPOINT ["/app/scripts/entrypoint.sh"]
 
 # Run gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--threads", "2", "--timeout", "120", "config.wsgi:application"]

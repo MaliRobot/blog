@@ -33,7 +33,7 @@ services:
     build:
       context: .
       target: development
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
       - media_volume:/app/media
@@ -44,6 +44,8 @@ services:
       - .env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DJANGO_LOG_LEVEL=INFO
+      - DJANGO_SERVER_LOG_LEVEL=WARNING
     depends_on:
       db:
         condition: service_healthy
@@ -63,6 +65,7 @@ services:
       - .env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DJANGO_LOG_LEVEL=INFO
     depends_on:
       - db
       - redis
@@ -78,6 +81,7 @@ services:
       - .env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DJANGO_LOG_LEVEL=INFO
     depends_on:
       - db
       - redis

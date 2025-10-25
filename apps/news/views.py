@@ -4,7 +4,21 @@ from .models import News
 from rest_framework import viewsets
 from .serializers import NewsSerializer
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 # Create your views here.
+
+
+def news_list(request):
+    """List of public news items with pagination."""
+    news_qs = News.objects.filter(public=True).order_by('-date_published')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(news_qs, 10)
+    news_page = paginator.page(page)
+    template = loader.get_template('news_list.html')
+    context = {
+        'news_list': news_page,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def single_news(request, pk):

@@ -18,7 +18,14 @@ SECRET_KEY = config('SECRET_KEY', default='your-secret-key-here')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,0.0.0.0', cast=lambda v: [s.strip() for s in v.split(',')])
+
+# CSRF trusted origins (helpful when running behind reverse proxies or in Docker)
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost,http://127.0.0.1,http://0.0.0.0,https://localhost,https://127.0.0.1',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 # Application definition
 DJANGO_APPS = [
@@ -59,7 +66,8 @@ LOCAL_APPS = [
     'apps.news',
     'apps.images',
     'apps.poems',
-    'apps.blog',  # renamed from posts for clarity
+    'apps.posts',
+    # 'apps.blog',  # removed: core is the main app now
     'apps.story',
     'apps.access_log',
 ]
@@ -74,7 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apps.access_log.middleware.AccessLogsMiddleware',
+    'apps.access_log.logging_middleware.AccessLogsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
 

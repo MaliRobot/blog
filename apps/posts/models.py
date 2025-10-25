@@ -3,7 +3,7 @@ from meta.models import ModelMeta
 from taggit.managers import TaggableManager
 from django.db import models
 from django.contrib.auth.models import User
-from core.helpers import RandomFileName
+from apps.core.helpers import RandomFileName
 from django.db.models import Q
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit

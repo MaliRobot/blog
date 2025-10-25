@@ -8,11 +8,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from apps.posts import views as post_views
 
 # API URLs
 api_patterns = [
     path('v1/', include('apps.core.api.urls')),
-    path('v1/blog/', include('apps.blog.api.urls')),
+    path('v1/blog/', include('apps.core.api.blog_urls')),
     path('v1/news/', include('apps.news.api.urls')),
     path('v1/events/', include('apps.events.api.urls')),
     path('v1/albums/', include('apps.albums.api.urls')),
@@ -20,22 +21,22 @@ api_patterns = [
 ]
 
 urlpatterns = [
-    # Admin
-    path('admin/', admin.site.urls),
-    
-    # Apps
-    path('', include('apps.core.urls')),
-    path('blog/', include('apps.blog.urls')),
-    path('news/', include('apps.news.urls')),
+    # Admin (custom path)
+    path('stavka/', admin.site.urls),
+
+    # Root and app routes
+    path('', post_views.blog, name='home'),  # explicit home URL name at project root
+    path('search/', post_views.search_posts, name='post_search'),
+    path('blog/', include('apps.core.blog_urls')),
+    path('stories/', include('apps.story.urls')),
+    path('news/', include('apps.news.urls')),  # register news namespace
     path('events/', include('apps.events.urls')),
-    path('albums/', include('apps.albums.urls')),
     path('poems/', include('apps.poems.urls')),
     path('about/', include('apps.about.urls')),
-    path('stories/', include('apps.story.urls')),
-    
+
     # API
     path('api/', include(api_patterns)),
-    
+
     # Third-party apps
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),

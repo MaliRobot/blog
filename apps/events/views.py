@@ -1,5 +1,5 @@
 from .models import Event
-from news.models import News
+from apps.news.models import News
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.template import loader

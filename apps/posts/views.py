@@ -5,7 +5,7 @@ from django.db.models import Q, Func, F, Value, TextField
 from django.forms import CharField
 
 from .models import Post
-from news.models import News
+from apps.news.models import News
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404
