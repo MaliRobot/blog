@@ -1,0 +1,16 @@
+from django.db import models
+
+from apps.core.helpers import RandomFileName
+
+# Create your models here.
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=255)
+    file = models.ImageField(upload_to=RandomFileName("images/"))
+
+    class Meta:
+        db_table = "images"
+
+    def __str__(self):
+        return self.name

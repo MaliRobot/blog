@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% load social_share %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9" id="blog">
+                {% for post in blog_posts %}
+                <div class="posts">
+                    <h1>{{ post.title }}</h1>
+                    <div class="blog-post-published">
+                        <p class="blog-author">{{ post.author }},&nbsp;</p>
+                        <p class="blog-time">{{ post.date_published | date:'jS F Y'}}</p>
+                    </div>
+                    <p class="blog-lead">{{ post.lead }}</p>
+                    <div class="img-wrapper">
+                        {% if post.image_thumbnail %}
+                        <img class="blog-image" src="{{ post.image_thumbnail.url }}" align=left />
+                        {% endif %}
+                    </div>
+                    <p class="blog-text">{{ post.text | safe }}</p>
+                    {% if post.tags.all.count > 0 %}
+                    <div class="post-tags">
+                        <h5 class="post-tags-title">Tags:</h5>
+                        {% for tag in post.tags.all %}
+                            {{ tag.name }} |
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <br>
+                    <div class="share">
+                        {% post_to_facebook post.get_absolute_url ' Facebook' %}
+                        {% post_to_twitter post.title post.get_absolute_url ' Twitter' %}
+                    </div>
+                    <div class="break">%&*$#</div>
+                </div>
+                {% endfor %}
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <h2>Latest news</h2>
+                    {% for new in news %}
+                    <div class="news-text-preview">
+                        <h3>
+                            <a class="news-title-preview" href="/">{{ new.title }}</a>
+                            <p>{{ new.text | safe }}</p>
+                        </h3>
+                    </div>
+                    <div class="break sidebar-news-brk">%&*$#</div>
+                    {% endfor %}
+                </div>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if blog_posts.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ blog_posts.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    {% if blog_posts.has_previous or blog_posts.has_next %}
+                    <span class="current">
+                        Page {{ blog_posts.number }} of {{ blog_posts.paginator.num_pages }}.
+                    </span>
+                    {% endif %}
+
+                    {% if blog_posts.has_next %}
+                        <a href="?page={{ blog_posts.next_page_number }}">next</a>
+                        <a href="?page={{ blog_posts.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
