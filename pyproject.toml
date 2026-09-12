@@ -153,3 +153,9 @@ addopts = [
     "--reuse-db",
 ]
 testpaths = ["tests", "apps"]
+
+[tool.setuptools.packages.find]
+include = ["apps*", "config*"]
+exclude = [
+    "apps.*.migrations*",
+]
