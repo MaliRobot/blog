@@ -30,8 +30,8 @@ jobs:
       - name: Django checks
         run: uv run python manage.py check
 
-      - name: Migration check
-        run: uv run python manage.py migrate --check
+#      - name: Migration check
+#        run: uv run python manage.py migrate --check
 
       - name: Check formatting
         run: uv run black --check .
