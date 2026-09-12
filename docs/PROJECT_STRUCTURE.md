@@ -114,6 +114,7 @@ Key environment variables:
 - `DEBUG`: Debug mode flag
 - `DATABASE_URL`: Database connection string
 - `REDIS_URL`: Redis connection string
+- `ENABLE_REDIS`: Set to `True` to enable Redis caching and session storage (default: `False`)
 
 ### Settings Organization
 - `base.py`: Common settings for all environments

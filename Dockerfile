@@ -1,16 +1,19 @@
 # Multi-stage Dockerfile for Django blog application
 
 # Base stage
-FROM python:3.11-slim as base
+FROM python:3.12-slim as base
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive \
+    UV_PYTHON=python3.12 \
+    PATH="/app/.venv/bin:/bin:/usr/local/bin:$PATH"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    python3-dev \
     gdal-bin \
     libgdal-dev \
     libpq-dev \
@@ -24,19 +27,20 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # Create app directory
 WORKDIR /app
 
 # Development stage
 FROM base as development
 
-# Copy requirements
-COPY requirements/base.txt /app/base.txt
-COPY requirements/development.txt /app/requirements.txt
+# Copy project files
+COPY pyproject.toml uv.lock /app/
 
-# Install Python dependencies
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+# Install Python dependencies using uv
+RUN uv sync --frozen --group dev
 
 # Copy application code
 COPY . /app/
@@ -47,13 +51,11 @@ RUN mkdir -p /app/logs /app/media /app/staticfiles
 # Production stage
 FROM base as production
 
-# Copy requirements
-COPY requirements/base.txt /app/base.txt
-COPY requirements/production.txt /app/requirements.txt
+# Copy project files
+COPY pyproject.toml uv.lock /app/
 
-# Install Python dependencies
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies using uv
+RUN uv sync --frozen --no-group dev
 
 # Install runtime tools for entrypoint (bash + netcat)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -74,8 +76,9 @@ RUN mkdir -p /app/logs /app/media /app/staticfiles && \
     useradd -r -g django django && \
     chown -R django:django /app
 
-# Collect static files at build time (safe; no DB required)
-RUN python manage.py collectstatic --noinput
+# Collect static files at build time
+# Use uv run to ensure we are in the environment
+RUN uv run python manage.py collectstatic --noinput
 
 # Switch to non-root user
 USER django
@@ -86,5 +89,5 @@ EXPOSE 8000
 # Set entrypoint to run migrations at container startup and then start gunicorn
 ENTRYPOINT ["/app/scripts/entrypoint.sh"]
 
-# Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--threads", "2", "--timeout", "120", "config.wsgi:application"]
+# Run gunicorn using uv run
+CMD ["/bin/uv", "run", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--threads", "2", "--timeout", "120", "config.wsgi:application"]

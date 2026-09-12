@@ -77,7 +77,10 @@ dev-reset: clean ## Reset development environment
 	python manage.py migrate
 	python manage.py loaddata fixtures/initial_data.json
 
-prod-deploy: ## Deploy to production (example)
+deploy: ## Deploy to production natively
+	bash scripts/deploy_native.sh
+
+prod-deploy: ## Deploy to production (legacy)
 	@echo "Running production deployment..."
 	git pull origin main
 	pip install -r requirements/production.txt

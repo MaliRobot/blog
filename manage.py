@@ -6,7 +6,9 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    # Default to development settings unless specified otherwise
+    from config.gdal_loader import load_gdal
+    load_gdal()
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.development')
     
     try:

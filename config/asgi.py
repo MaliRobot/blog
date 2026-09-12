@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/stable/howto/deployment/asgi/
 
 import os
 
+from config.gdal_loader import load_gdal
+load_gdal()
+
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.production')

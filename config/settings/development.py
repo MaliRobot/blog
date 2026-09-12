@@ -11,14 +11,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
-# Database - Use SQLite for development
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # Debug toolbar configuration
 INSTALLED_APPS += ['debug_toolbar']
 MIDDLEWARE.insert(1, 'debug_toolbar.middleware.DebugToolbarMiddleware')
@@ -79,9 +71,6 @@ LOGGING['loggers']['django.server'] = {
 
 # Static files
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-# Media files - simplified for development
-MEDIA_ROOT = BASE_DIR / 'media_dev'
 
 # Disable SSL redirect in development
 SECURE_SSL_REDIRECT = False

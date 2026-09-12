@@ -41,6 +41,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'leaflet',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -51,7 +52,6 @@ THIRD_PARTY_APPS = [
     # 'debug_toolbar',
     'meta',
     'taggit',
-    'leaflet',
     'django_social_share',
     'location_field.apps.DefaultConfig',
     'django_recaptcha',
@@ -202,9 +202,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 # Leaflet configuration
@@ -276,3 +275,15 @@ LOGGING = {
 # Create logs directory if it doesn't exist
 LOGS_DIR = BASE_DIR / 'logs'
 LOGS_DIR.mkdir(exist_ok=True)
+
+
+# GDAL and GEOS paths (Windows-only, for Linux they should be found automatically)
+if os.name == 'nt':
+    GDAL_LIBRARY_PATH = config('GDAL_LIBRARY_PATH', default='')
+    GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default='')
+else:
+    # On Linux, only use them if they don't look like Windows paths
+    _gdal = config('GDAL_LIBRARY_PATH', default='')
+    _geos = config('GEOS_LIBRARY_PATH', default='')
+    GDAL_LIBRARY_PATH = _gdal if not (':/' in _gdal or ':\\' in _gdal) else ''
+    GEOS_LIBRARY_PATH = _geos if not (':/' in _geos or ':\\' in _geos) else ''

@@ -11,9 +11,9 @@ from itertools import chain
 
 
 def index(request):
-    news_articles = News.objects.filter(public=True).order_by('-date_published')
+    news_list = News.objects.filter(public=True).order_by('-date_published')
     page = request.GET.get('page', 1)
-    paginator = Paginator(news_articles, 5)
+    paginator = Paginator(news_list, 5)
     template = loader.get_template('index.html')
     news = paginator.page(page)
     posts = Post.objects.filter(public=True).order_by('-date_published')[:10]
@@ -31,32 +31,34 @@ def index(request):
 class SearchView(ListView):
     template_name = 'search_results.html'
     paginate_by = 20
-    count = 0
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['count'] = self.count or 0
-        context['query'] = self.request.GET.get('q')
-        return context
 
     def get_queryset(self):
-        request = self.request
-        query = request.GET.get('q', None)
+        query = self.request.GET.get('q', '')
 
-        if query is not None:
-            blog_results = Post.objects.search(query)
-            news_results = News.objects.search(query)
+        if not query:
+            self.count = 0
+            return []
 
-            queryset_chain = chain(
-                blog_results,
-                news_results,
-            )
-            qs = sorted(queryset_chain,
-                        key=lambda instance: instance.date_published,
-                        reverse=True)
-            self.count = len(qs)
-            return qs
-        return Post.objects.none()  # just an empty queryset as default
+        results = chain(
+            Post.objects.search(query),
+            News.objects.search(query),
+        )
+
+        results = sorted(
+            results,
+            key=lambda instance: instance.date_published,
+            reverse=True,
+        )
+
+        self.count = len(results)
+        return results
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['count'] = getattr(self, 'count', 0)
+        context['query'] = self.request.GET.get('q', '')
+
+        return context
 
 
 def error_404_view(request, exception):

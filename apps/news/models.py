@@ -27,7 +27,7 @@ class News(ModelMeta, models.Model):
     text = RichTextField()
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
-    image = models.ImageField(upload_to='static/images/', blank=True, default=None)
+    image = models.ImageField(upload_to='images/', blank=True, default=None)
     image_thumbnail = ImageSpecField(source='image',
                                      processors=[ResizeToFit(400, 200)],
                                      format='JPEG',

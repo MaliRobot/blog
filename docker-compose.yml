@@ -29,38 +29,39 @@ services:
       timeout: 5s
       retries: 5
 
-  web:
-    build:
-      context: .
-      target: development
-    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/app
-      - media_volume:/app/media
-      - static_volume:/app/staticfiles
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env
-    environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.development
-      - DJANGO_LOG_LEVEL=INFO
-      - DJANGO_SERVER_LOG_LEVEL=WARNING
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    stdin_open: true
-    tty: true
+#  web:
+#    build:
+#      context: .
+#      target: development
+#    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+#    volumes:
+#      - .:/app
+#      - media_volume:/app/media
+#      - static_volume:/app/staticfiles
+#    ports:
+#      - "8000:8000"
+#    env_file:
+#      - .env
+#    environment:
+#      - DJANGO_SETTINGS_MODULE=config.settings.development
+#      - DJANGO_LOG_LEVEL=INFO
+#      - DJANGO_SERVER_LOG_LEVEL=WARNING
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#      redis:
+#        condition: service_healthy
+#    stdin_open: true
+#    tty: true
 
   celery:
     build:
       context: .
       target: development
-    command: celery -A config worker -l info
+    command: /bin/uv run celery -A config worker -l info
     volumes:
       - .:/app
+      - /app/.venv
     env_file:
       - .env
     environment:
@@ -74,9 +75,10 @@ services:
     build:
       context: .
       target: development
-    command: celery -A config beat -l info
+    command: /bin/uv run celery -A config beat -l info
     volumes:
       - .:/app
+      - /app/.venv
     env_file:
       - .env
     environment:

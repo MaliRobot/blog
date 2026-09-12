@@ -1,37 +1,64 @@
 {% extends "base.html" %}
 {% load class_name %}
-{% block content %}
 
+{% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class='row title-row my-5'>
-            <div class='col-12 py-0'>
-                <h3 class='my-0 py-0'>{{ count }} results for <b>{{ query }}</b></h3>
-            </div>
+    <div class="row title-row my-5">
+        <div class="col-12 py-0">
+            {% if count > 0 %}
+                <h3 class="my-0 py-0">{{ count }} results for <b>{{ query }}</b></h3>
+            {% else %}
+                <h3 class="my-0 py-0">No results for <b>{{ query }}</b></h3>
+            {% endif %}
         </div>
     </div>
-    <div>
-         {% for object in object_list %}
-            {% with object|class_name as klass %}
-              {% if klass == 'Post' %}
-                   <div class='row'>
-                     <div class='col-12'>
-                        Blog post: <a href='{{ object.get_absolute_url }}'>{{ object.title }}</a>
-                    </div>
-                  </div>
-              {% else %}
-                   <div class='row'>
-                     <div class='col-12'>
-                        News: <a href='{{ object.get_absolute_url }}'>{{ object.title }}</a>
-                      </div>
-                    </div>
-                {% endif %}
 
-            {% endwith %}
-
+    <div class="search-results">
+        {% for object in object_list %}
+            <div class="row mb-3">
+                <div class="col-12">
+                    {% with klass=object|class_name %}
+                        {% if klass == 'Post' %}
+                            <strong>Blog post:</strong> <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                        {% elif klass == 'News' %}
+                            <strong>News:</strong> <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                        {% else %}
+                            <strong>{{ klass }}:</strong> <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
         {% empty %}
+            {% if query %}
+                <div class="row">
+                    <div class="col-12">
+                        <p>No content matched your search criteria.</p>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
-</div>
 
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?q={{ query|urlencode }}&page=1">&laquo; first</a>
+                    <a href="?q={{ query|urlencode }}&page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                {% if page_obj.has_previous or page_obj.has_next %}
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                    <a href="?q={{ query|urlencode }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?q={{ query|urlencode }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</div>
 {% endblock content %}

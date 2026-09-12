@@ -44,7 +44,7 @@ def single_post(request, pk):
 
 
 def search_posts(request):
-    template = loader.get_template('post_search_results.html')
+    template = loader.get_template('search_results.html')
     search = request.GET.get("q")
     if search:
         search_terms = search.split()
@@ -62,6 +62,8 @@ def search_posts(request):
     blog_posts = paginator.page(page)
     context = {
         'posts': blog_posts,
+        'count': posts.count(),
+        'query': search,
     }
     return HttpResponse(template.render(context, request))
 

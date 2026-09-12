@@ -6,7 +6,7 @@ from apps.core.helpers import RandomFileName
 
 class Image(models.Model):
     name = models.CharField(max_length=255)
-    file = models.ImageField(upload_to=RandomFileName('static/images/'))
+    file = models.ImageField(upload_to=RandomFileName('images/'))
 
     class Meta:
         db_table = "images"

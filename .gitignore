@@ -83,3 +83,4 @@ docker-compose.override.yml
 # Backups
 *.bak
 *.backup
+/.output.txt

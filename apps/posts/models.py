@@ -30,7 +30,7 @@ class Post(ModelMeta, models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     public = models.BooleanField()
     language = models.CharField(max_length=3, default='eng')
-    image = models.ImageField(upload_to=RandomFileName('static/images/'), blank=True, default=None)
+    image = models.ImageField(upload_to=RandomFileName('images/'), blank=True, default=None)
     image_thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFit(400, 200)],
                                       format='JPEG',

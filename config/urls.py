@@ -8,6 +8,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from apps.core import views as core_views
 from apps.posts import views as post_views
 
 # API URLs
@@ -25,17 +26,18 @@ urlpatterns = [
     path('stavka/', admin.site.urls),
 
     # Root and app routes
-    path('', post_views.blog, name='home'),  # explicit home URL name at project root
-    path('search/', post_views.search_posts, name='post_search'),
+    path('', core_views.index, name='home'),  # explicit home URL name at project root
+    path('search/', core_views.SearchView.as_view(), name='post_search'),
     path('blog/', include('apps.core.blog_urls')),
     path('stories/', include('apps.story.urls')),
     path('news/', include('apps.news.urls')),  # register news namespace
     path('events/', include('apps.events.urls')),
-    path('poems/', include('apps.poems.urls')),
+    path('poetry/', include('apps.poems.urls')),
     path('about/', include('apps.about.urls')),
+    path('', include('apps.core.urls')),
 
-    # API
-    path('api/', include(api_patterns)),
+    # API disabled for now
+    # path('api/', include(api_patterns)),
 
     # Third-party apps
     path('ckeditor/', include('ckeditor_uploader.urls')),

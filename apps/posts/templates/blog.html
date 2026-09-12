@@ -52,20 +52,20 @@
 
             <div class="pagination">
                 <span class="step-links">
-                    {% if post.has_previous %}
+                    {% if blog_posts.has_previous %}
                         <a href="?page=1">&laquo; first</a>
-                        <a href="?page={{ news.previous_page_number }}">previous</a>
+                        <a href="?page={{ blog_posts.previous_page_number }}">previous</a>
                     {% endif %}
 
-                    {% if post.has_previous or post.has_next %}
+                    {% if blog_posts.has_previous or blog_posts.has_next %}
                     <span class="current">
-                        Page {{ post.number }} of {{ post.paginator.num_pages }}.
+                        Page {{ blog_posts.number }} of {{ blog_posts.paginator.num_pages }}.
                     </span>
                     {% endif %}
 
-                    {% if post.has_next %}
-                        <a href="?page={{ news.next_page_number }}">next</a>
-                        <a href="?page={{ news.paginator.num_pages }}">last &raquo;</a>
+                    {% if blog_posts.has_next %}
+                        <a href="?page={{ blog_posts.next_page_number }}">next</a>
+                        <a href="?page={{ blog_posts.paginator.num_pages }}">last &raquo;</a>
                     {% endif %}
                 </span>
             </div>
