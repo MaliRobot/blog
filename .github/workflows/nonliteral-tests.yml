@@ -25,5 +25,4 @@ jobs:
 
       - name: Run Django tests
         run: |
-          cd nonliteral
           python manage.py test
