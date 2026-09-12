@@ -10,7 +10,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 from apps.core import views as core_views
-from apps.posts import views as post_views
 
 # API URLs
 api_patterns = [
