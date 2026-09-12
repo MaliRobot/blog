@@ -1,10 +1,10 @@
-from .models import AccessLog
 from django.conf import settings
 from django.utils import timezone
 
+from .models import AccessLog
+
 
 class AccessLogsMiddleware(object):
-
     def __init__(self, get_response=None):
         self.get_response = get_response
         # One-time configuration and initialization.
@@ -18,23 +18,31 @@ class AccessLogsMiddleware(object):
         response = self.get_response(request)
 
         # exclusions
-        if request.path.startswith(settings.MEDIA_URL) or request.path.startswith(settings.STATIC_URL) \
-                or request.path.startswith('/stavka') or request.path.startswith('/favicon.'):
+        if (
+            request.path.startswith(settings.MEDIA_URL)
+            or request.path.startswith(settings.STATIC_URL)
+            or request.path.startswith("/stavka")
+            or request.path.startswith("/favicon.")
+        ):
             return response
 
         # get the request path
         access_logs_data["path"] = request.path
 
         # get the client's IP address
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        access_logs_data["ip_address"] = x_forwarded_for.split(',')[0] if x_forwarded_for else request.META.get('REMOTE_ADDR')
+        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+        access_logs_data["ip_address"] = (
+            x_forwarded_for.split(",")[0]
+            if x_forwarded_for
+            else request.META.get("REMOTE_ADDR")
+        )
         access_logs_data["method"] = request.method
-        access_logs_data["referrer"] = request.META.get('HTTP_REFERER',None)
+        access_logs_data["referrer"] = request.META.get("HTTP_REFERER", None)
         access_logs_data["session_key"] = request.session.session_key
 
         data = dict()
         data["get"] = dict(request.GET.copy())
-        data['post'] = dict(request.POST.copy())
+        data["post"] = dict(request.POST.copy())
 
         # remove password form post data for security reasons
         keys_to_remove = ["password", "csrfmiddlewaretoken"]

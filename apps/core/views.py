@@ -1,39 +1,43 @@
-from django.http import HttpResponse
-from django.core.paginator import Paginator
-from django.template import loader
-from django.shortcuts import render
-from apps.news.models import News
-from apps.posts.models import Post
-from apps.events.models import Event
-from django.views.generic import ListView
 import datetime
 from itertools import chain
 
+from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.template import loader
+from django.views.generic import ListView
+
+from apps.events.models import Event
+from apps.news.models import News
+from apps.posts.models import Post
+
 
 def index(request):
-    news_list = News.objects.filter(public=True).order_by('-date_published')
-    page = request.GET.get('page', 1)
+    news_list = News.objects.filter(public=True).order_by("-date_published")
+    page = request.GET.get("page", 1)
     paginator = Paginator(news_list, 5)
-    template = loader.get_template('index.html')
+    template = loader.get_template("index.html")
     news = paginator.page(page)
-    posts = Post.objects.filter(public=True).order_by('-date_published')[:10]
+    posts = Post.objects.filter(public=True).order_by("-date_published")[:10]
     today = datetime.date.today()
     yesterday = today - datetime.timedelta(days=2)
-    events = Event.objects.filter(public=True, start__gt=yesterday).order_by('-start')[:4]
+    events = Event.objects.filter(public=True, start__gt=yesterday).order_by("-start")[
+        :4
+    ]
     context = {
-        'news': news,
-        'posts': posts,
-        'events': events,
+        "news": news,
+        "posts": posts,
+        "events": events,
     }
     return HttpResponse(template.render(context, request))
 
 
 class SearchView(ListView):
-    template_name = 'search_results.html'
+    template_name = "search_results.html"
     paginate_by = 20
 
     def get_queryset(self):
-        query = self.request.GET.get('q', '')
+        query = self.request.GET.get("q", "")
 
         if not query:
             self.count = 0
@@ -55,26 +59,25 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['count'] = getattr(self, 'count', 0)
-        context['query'] = self.request.GET.get('q', '')
+        context["count"] = getattr(self, "count", 0)
+        context["query"] = self.request.GET.get("q", "")
 
         return context
 
 
 def error_404_view(request, exception):
-    template = loader.get_template('error404.html')
+    template = loader.get_template("error404.html")
     return HttpResponse(template.render({}, request))
 
 
 def error_505_view(request):
-    template = loader.get_template('error505.html')
+    template = loader.get_template("error505.html")
     return HttpResponse(template.render({}, request))
-
 
 
 def error_404(request, exception):
     """Custom 404 error handler compatible with Django's handler404."""
-    template = loader.get_template('error404.html')
+    template = loader.get_template("error404.html")
     return HttpResponse(template.render({}, request), status=404)
 
 
@@ -82,17 +85,17 @@ def error_500(request):
     """Custom 500 error handler compatible with Django's handler500."""
     # Reuse existing 505 template for server errors if that's what's available
     try:
-        template = loader.get_template('error505.html')
+        template = loader.get_template("error505.html")
         return HttpResponse(template.render({}, request), status=500)
     except Exception:
-        return HttpResponse('Server Error', status=500)
+        return HttpResponse("Server Error", status=500)
 
 
 def error_403(request, exception):
     """Custom 403 error handler compatible with Django's handler403."""
-    return HttpResponse('Forbidden', status=403)
+    return HttpResponse("Forbidden", status=403)
 
 
 def error_400(request, exception):
     """Custom 400 error handler compatible with Django's handler400."""
-    return HttpResponse('Bad Request', status=400)
+    return HttpResponse("Bad Request", status=400)

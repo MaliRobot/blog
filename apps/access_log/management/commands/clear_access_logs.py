@@ -1,12 +1,13 @@
-from django.core.management.base import BaseCommand, CommandError
 import datetime
+
+from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
+
 from flow.models import AccessLog
 
 
 class Command(BaseCommand):
-
-    help = 'Clean the user access logs older than x days'
+    help = "Clean the user access logs older than x days"
 
     def add_arguments(self, parser):
         pass

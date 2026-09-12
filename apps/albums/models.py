@@ -1,5 +1,7 @@
 from django.db import models
+
 from apps.images.models import Image
+
 # Create your models here.
 
 
@@ -8,7 +10,7 @@ class Album(models.Model):
     artist = models.CharField(max_length=255)
     description = models.TextField()
     code = models.CharField(max_length=12)
-    release_date = models.DateField('release date')
+    release_date = models.DateField("release date")
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     public = models.BooleanField()
 
@@ -17,4 +19,3 @@ class Album(models.Model):
 
     def __str__(self):
         return self.name
-

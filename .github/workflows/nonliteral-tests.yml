@@ -19,8 +19,28 @@ jobs:
       - name: Set up Python
         run: uv python install 3.12
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin libgdal-dev
+
       - name: Install dependencies
         run: uv sync --group dev
+
+      - name: Django checks
+        run: uv run python manage.py check
+
+      - name: Migration check
+        run: uv run python manage.py migrate --check
+
+      - name: Check formatting
+        run: uv run black --check .
+
+      - name: Check imports
+        run: uv run isort --check-only .
+
+#      - name: Lint
+#        run: uv run flake8 .
 
       - name: Run Django tests
         run: uv run python manage.py test
