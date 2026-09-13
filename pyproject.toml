@@ -59,7 +59,7 @@ dependencies = [
     "protobuf==5.26.1",
     "PyMySQL==1.1.0",
     "six==1.16.0",
-    "sqlparse==0.5.0",
+    "sqlparse==0.6.0",
     "tqdm==4.66.2",
     "zipp==3.18.1",
 ]
