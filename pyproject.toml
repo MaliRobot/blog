@@ -54,7 +54,7 @@ dependencies = [
     "importlib-metadata==7.1.0",
     "jsonfield==3.1.0",
     "Markdown==3.6.0",
-    "mysql-connector-python==8.3.0",
+    "mysql-connector-python==9.1.0",
     "pilkit==3.0",
     "protobuf==5.26.1",
     "PyMySQL==1.1.0",
