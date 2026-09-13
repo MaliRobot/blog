@@ -175,8 +175,8 @@ def get_user_stats(request):
         {
             "money": user.money,
             "energy": user.energy,
-            "current_chapter": user.current_chapter.title
-            if user.current_chapter
-            else None,
+            "current_chapter": (
+                user.current_chapter.title if user.current_chapter else None
+            ),
         }
     )
