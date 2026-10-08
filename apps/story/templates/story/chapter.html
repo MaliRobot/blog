@@ -30,13 +30,13 @@
                                         <h5 class="card-title">{{ choice.text }}</h5>
                                         <div class="mb-3">
                                             {% if choice.money_cost < 0 %}
-                                                <span class="badge bg-danger">💰 -{{ choice.money_cost|abs }}</span>
+                                                <span class="badge bg-danger">💰 -{{ choice.money_cost }}</span>
                                             {% elif choice.money_cost > 0 %}
                                                 <span class="badge bg-success">💰 +{{ choice.money_cost }}</span>
                                             {% endif %}
 
                                             {% if choice.energy_cost < 0 %}
-                                                <span class="badge bg-warning">⚡ -{{ choice.energy_cost|abs }}</span>
+                                                <span class="badge bg-warning">⚡ -{{ choice.energy_cost }}</span>
                                             {% elif choice.energy_cost > 0 %}
                                                 <span class="badge bg-info">⚡ +{{ choice.energy_cost }}</span>
                                             {% endif %}

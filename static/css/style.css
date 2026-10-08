@@ -439,6 +439,53 @@ input[type=text], input[type=email], textarea[name=message] {
 }
 /** end about **/
 
+/** susko **/
+#susko-title {
+    text-align: center;
+}
+.susko-section {
+    padding-bottom: 1em;
+}
+.susko-section-main {
+    padding-bottom: 2em;
+}
+.susko-section-title {
+    margin-bottom: 0.5em;
+    border-color: #B0B0B0;
+    border-bottom: solid 1px;
+}
+.susko-section-title-main {
+    font-size: 2.5em;
+    text-align: center;
+    border-bottom: medium double #333;
+}
+.susko-text-main {
+    font-size: 1.15em;
+}
+.susko-text p,
+.susko-text-main p {
+    font-family: "Merriweather", serif;
+}
+.susko-text img {
+    max-width: 100%;
+    height: auto;
+}
+.susko-image {
+    max-width: 50%;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    float: left;
+}
+.susko-image-main {
+    max-width: 100%;
+    padding-right: 0;
+    float: none;
+}
+.susko-empty {
+    text-align: center;
+}
+/** end susko **/
+
 /** share **/
 .share {
     display: flex;
@@ -496,12 +543,22 @@ input[type=text], input[type=email], textarea[name=message] {
     .blog-image {
         max-width: 50%;
     }
+
+    .susko-section-title-main {
+        font-size: 2em;
+    }
 }
 
 @media only screen and (max-width: 576px) {
     .posts, #news {
         border: unset;
         /*padding-right: unset;*/
+    }
+
+    .susko-image {
+        max-width: 100%;
+        float: none;
+        padding-right: 0;
     }
 }
 

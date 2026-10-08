@@ -32,6 +32,7 @@ urlpatterns = [
     path("news/", include("apps.news.urls")),  # register news namespace
     path("events/", include("apps.events.urls")),
     path("poetry/", include("apps.poems.urls")),
+    path("susko/", include("apps.susko.urls")),
     path("about/", include("apps.about.urls")),
     path("", include("apps.core.urls")),
     # API disabled for now

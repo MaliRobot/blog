@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block meta %}
+    {% include 'includes/meta.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 id="susko-title">Šuško</h1>
+            <div class="break">~#$*&~</div>
+
+            <div class="col-xs-12 offset-sm-2 col-sm-8" id="susko-sections">
+                {% if main_section %}
+                    <section class="susko-section susko-section-main" id="susko-section-{{ main_section.pk }}">
+                        <h2 class="susko-section-title susko-section-title-main">{{ main_section.title }}</h2>
+                        {% if main_section.image %}
+                            <div class="img-wrapper">
+                                <img class="susko-image susko-image-main"
+                                     src="{{ main_section.image_thumbnail.url }}"
+                                     alt="{{ main_section.title }}" />
+                            </div>
+                        {% endif %}
+                        <div class="susko-text susko-text-main">{{ main_section.text | safe }}</div>
+                    </section>
+                {% endif %}
+
+                {% for section in sections %}
+                    <div class="break">%&*$#</div>
+                    <section class="susko-section" id="susko-section-{{ section.pk }}">
+                        <h3 class="susko-section-title">{{ section.title }}</h3>
+                        {% if section.image %}
+                            <div class="img-wrapper">
+                                <img class="susko-image"
+                                     src="{{ section.image_thumbnail.url }}"
+                                     alt="{{ section.title }}" />
+                            </div>
+                        {% endif %}
+                        <div class="susko-text">{{ section.text | safe }}</div>
+                    </section>
+                {% endfor %}
+
+                {% if not main_section %}
+                    <p class="susko-empty">There is nothing here yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -87,7 +87,10 @@ else:
 
 # Static files - Use WhiteNoise for serving static files
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+}
 
 # Media files - Use cloud storage in production only if AWS is configured
 AWS_S3_CUSTOM_DOMAIN = ""

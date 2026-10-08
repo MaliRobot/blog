@@ -66,18 +66,18 @@ class SearchView(ListView):
 
 
 def error_404_view(request, exception):
-    template = loader.get_template("error404.html")
+    template = loader.get_template("errors/error404.html")
     return HttpResponse(template.render({}, request))
 
 
 def error_505_view(request):
-    template = loader.get_template("error505.html")
+    template = loader.get_template("errors/error505.html")
     return HttpResponse(template.render({}, request))
 
 
 def error_404(request, exception):
     """Custom 404 error handler compatible with Django's handler404."""
-    template = loader.get_template("error404.html")
+    template = loader.get_template("errors/error404.html")
     return HttpResponse(template.render({}, request), status=404)
 
 
@@ -85,7 +85,7 @@ def error_500(request):
     """Custom 500 error handler compatible with Django's handler500."""
     # Reuse existing 505 template for server errors if that's what's available
     try:
-        template = loader.get_template("error505.html")
+        template = loader.get_template("errors/error505.html")
         return HttpResponse(template.render({}, request), status=500)
     except Exception:
         return HttpResponse("Server Error", status=500)

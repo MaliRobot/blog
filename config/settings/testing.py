@@ -42,7 +42,10 @@ CACHES = {
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 # Static files storage
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+}
 
 # Media files for testing
 MEDIA_ROOT = BASE_DIR / "test_media"
@@ -79,6 +82,12 @@ LOGGING = {
 
 # Disable SSL redirect for tests
 SECURE_SSL_REDIRECT = False
+# The reCAPTCHA keys are irrelevant while testing: when the .env file carries
+# Google's test keys, django_recaptcha raises a system check error that stops
+# the test runner before a single test is executed. Development settings
+# silence the very same check.
+SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
+
 
 # Test-specific settings
 TEST_RUNNER = "django.test.runner.DiscoverRunner"

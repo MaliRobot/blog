@@ -72,6 +72,7 @@ LOCAL_APPS = [
     "apps.images",
     "apps.poems",
     "apps.posts",
+    "apps.susko",
     # 'apps.blog',  # removed: core is the main app now
     "apps.story",
     "apps.access_log",
@@ -164,6 +165,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Sites framework
 SITE_ID = 1
+
+# django-meta uses this when generating absolute URLs for metadata.
+META_SITE_DOMAIN = config("META_SITE_DOMAIN", default="localhost")
+META_SITE_PROTOCOL = config("META_SITE_PROTOCOL", default="https")
 
 # Email configuration
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

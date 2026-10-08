@@ -8,6 +8,7 @@ from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+META_SITE_PROTOCOL = config("META_SITE_PROTOCOL", default="http")
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 
@@ -71,7 +72,10 @@ LOGGING["loggers"]["django.server"] = {
 }
 
 # Static files
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+}
 
 # Disable SSL redirect in development
 SECURE_SSL_REDIRECT = False

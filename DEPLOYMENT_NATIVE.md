@@ -92,12 +92,17 @@ server {
     server_name your_domain.com;
 
     location = /favicon.ico { access_log off; log_not_found off; }
+    # Must point at STATIC_ROOT (the output of `collectstatic`), *not* at the
+    # `static/` source folder. `static/` only holds the project's own assets;
+    # third-party assets (admin, CKEditor, leaflet, ...) are gathered into
+    # `staticfiles/` by `collectstatic`.
     location /static/ {
         root /home/django/blog;
+        alias /home/django/blog/staticfiles/;
     }
-
     location /media/ {
         root /home/django/blog;
+        alias /home/django/blog/media/;
     }
 
     location / {
