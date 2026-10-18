@@ -85,11 +85,12 @@ docker-compose.override.yml
 *.backup
 /.output.txt
 
-# Various
+# Local/generated data
 data-final.json
-.lesshst
 .local/
-.python-version
-.ssh/
-.well-known/
 
+# Local shell state
+.lesshst
+
+# Local secrets
+.ssh/
