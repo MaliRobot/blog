@@ -15,16 +15,24 @@ def about(request):
 
     if request.method == "POST":
         form = ContactForm(request.POST)
+        is_valid = form.is_valid()
 
-        if form.is_valid():
+        print("CONTACT POST received")
+        print("CONTACT form valid:", is_valid)
+        print("CONTACT form errors:", form.errors)
+
+        if is_valid:
             message = Contact(
-                subject=form.data["subject"],
-                message=form.data["message"],
-                email=form.data["email"],
+                subject=form.cleaned_data["subject"],
+                message=form.cleaned_data["message"],
+                email=form.cleaned_data["email"],
             )
             message.save()
+            print("CONTACT saved, pk:", message.pk)
             return render(
-                request, "about.html", {"form": None, "submitted": True, "about": about}
+                request,
+                "about.html",
+                {"form": None, "submitted": True, "about": about},
             )
 
     form = ContactForm()
