@@ -16,7 +16,7 @@
                 {% if submitted %}
                     <p>We got your message.</p>
                 {% else %}
-                    <form action="/about" method="post">
+                    <form action="/about/" method="post">
                         {% csrf_token %}
                         <div class="">
                             <div id="subject" class="contact-field">{{ form.subject }}</div>
