@@ -18,6 +18,11 @@
                 {% else %}
                     <form action="/about/" method="post">
                         {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        {{ form.subject.errors }}
+                        {{ form.email.errors }}
+                        {{ form.message.errors }}
+                        {{ form.captcha.errors }}
                         <div class="">
                             <div id="subject" class="contact-field">{{ form.subject }}</div>
                             <div id="email" class="contact-field">{{ form.email }}</div>
