@@ -388,6 +388,11 @@ footer {
     padding-bottom: 2em;
 }
 
+.poem-text,
+.poem-text * {
+    font-family: "Merriweather", serif !important;
+}
+
 .album-title {
     text-align: center;
 }
