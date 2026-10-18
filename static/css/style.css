@@ -447,6 +447,7 @@ input[type=text], input[type=email], textarea[name=message] {
 /** susko **/
 #susko-title {
     text-align: center;
+    font-size: 4em;
 }
 .susko-section {
     padding-bottom: 1em;
@@ -460,16 +461,16 @@ input[type=text], input[type=email], textarea[name=message] {
     border-bottom: solid 1px;
 }
 .susko-section-title-main {
-    font-size: 2.5em;
+    font-size: 2.25em;
     text-align: center;
     border-bottom: medium double #333;
 }
 .susko-text-main {
     font-size: 1.15em;
 }
-.susko-text p,
-.susko-text-main p {
-    font-family: "Merriweather", serif;
+.susko-text,
+.susko-text * {
+    font-family: "Merriweather", serif !important;
 }
 .susko-text img {
     max-width: 100%;
@@ -549,8 +550,12 @@ input[type=text], input[type=email], textarea[name=message] {
         max-width: 50%;
     }
 
+    #susko-title {
+        font-size: 3em;
+    }
+
     .susko-section-title-main {
-        font-size: 2em;
+        font-size: 1.75em;
     }
 }
 
