@@ -17,10 +17,6 @@ def about(request):
         form = ContactForm(request.POST)
         is_valid = form.is_valid()
 
-        print("CONTACT POST received")
-        print("CONTACT form valid:", is_valid)
-        print("CONTACT form errors:", form.errors)
-
         if is_valid:
             message = Contact(
                 subject=form.cleaned_data["subject"],
@@ -28,7 +24,6 @@ def about(request):
                 email=form.cleaned_data["email"],
             )
             message.save()
-            print("CONTACT saved, pk:", message.pk)
             return render(
                 request,
                 "about.html",
