@@ -84,3 +84,12 @@ docker-compose.override.yml
 *.bak
 *.backup
 /.output.txt
+
+# Various
+data-final.json
+.lesshst
+.local/
+.python-version
+.ssh/
+.well-known/
+
