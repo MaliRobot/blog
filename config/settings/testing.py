@@ -44,7 +44,7 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 # Static files storage
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
 }
 
 # Media files for testing

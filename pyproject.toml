@@ -13,10 +13,12 @@ dependencies = [
     "django-admin-interface==0.28.6",
     "django-colorfield==0.11.0",
     "django-ckeditor==6.7.1",
-    "djangorestframework==3.17.2",
+    "djangorestframework==3.18.2",
     "django-cors-headers==4.3.0",
     "django-allauth",
-    "Pillow==12.3.0",
+    "Pillow==13.0.0",
+    "certifi==2026.10.18",
+    "urllib3==2.8.0",
     "django-imagekit==5.0.0",
     "django-extensions==3.2.3",
     "django-taggit==5.0.1",
@@ -79,6 +81,7 @@ dev = [
     "isort==5.12.0",
     "pylint==3.0.2",
     "pre-commit==3.5.0",
+    "virtualenv==21.14.4",
     "sphinx==7.2.6",
     "sphinx-rtd-theme==2.0.0",
     "werkzeug==3.1.6",
@@ -147,6 +150,7 @@ skip_covered = false
 DJANGO_SETTINGS_MODULE = "config.settings.testing"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 addopts = [
+    "--ds=config.settings.testing",
     "--strict-markers",
     "--tb=short",
     "--no-migrations",

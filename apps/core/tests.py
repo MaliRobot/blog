@@ -12,10 +12,7 @@ import pathlib
 
 from django.conf import settings
 from django.contrib.staticfiles import finders
-from django.contrib.staticfiles.finders import (
-    AppDirectoriesFinder,
-    FileSystemFinder,
-)
+from django.contrib.staticfiles.finders import AppDirectoriesFinder, FileSystemFinder
 from django.test import SimpleTestCase
 
 import ckeditor
