@@ -30,9 +30,7 @@ class SectionAdmin(admin.ModelAdmin):
             if section.move_up():
                 moved += 1
 
-        self.message_user(
-            request, f"Moved {moved} section(s) up.", level=messages.INFO
-        )
+        self.message_user(request, f"Moved {moved} section(s) up.", level=messages.INFO)
 
     @admin.action(description="Move selected sections down")
     def move_down(self, request, queryset):
@@ -81,9 +79,7 @@ class SectionAdmin(admin.ModelAdmin):
         except (TypeError, ValueError):
             return JsonResponse({"error": "Invalid section id."}, status=400)
 
-        known_ids = set(
-            Section.objects.filter(pk__in=ids).values_list("pk", flat=True)
-        )
+        known_ids = set(Section.objects.filter(pk__in=ids).values_list("pk", flat=True))
 
         if len(known_ids) != len(set(ids)):
             return JsonResponse({"error": "Unknown section id."}, status=400)
