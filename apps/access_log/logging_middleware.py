@@ -44,10 +44,12 @@ class AccessLogsMiddleware(object):
         data["get"] = dict(request.GET.copy())
         data["post"] = dict(request.POST.copy())
 
-        # remove password form post data for security reasons
-        keys_to_remove = ["password", "csrfmiddlewaretoken"]
-        for key in keys_to_remove:
-            data["post"].pop(key, None)
+        # Remove password fields and the CSRF token before logging form data.
+        data["post"] = {
+            key: value
+            for key, value in data["post"].items()
+            if "password" not in key.lower() and key.lower() != "csrfmiddlewaretoken"
+        }
 
         access_logs_data["data"] = data
         access_logs_data["timestamp"] = timezone.now()
