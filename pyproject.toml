@@ -54,7 +54,6 @@ dependencies = [
     "dnspython==2.6.1",
     "importlib-metadata==7.1.0",
     "jsonfield==3.1.0",
-    "Markdown==3.6.0",
     "mysql-connector-python==9.1.0",
     "pilkit==3.0",
     "protobuf==5.29.6",
@@ -77,15 +76,15 @@ dev = [
     "factory-boy==3.3.0",
     "faker==20.1.0",
     "flake8==6.1.0",
-    "black==26.5.1",
+    "black==26.10.1",
     "isort==5.12.0",
     "pylint==3.0.2",
     "pre-commit==3.5.0",
-    "virtualenv==21.14.4",
+    "virtualenv==21.14.9",
     "sphinx==7.2.6",
     "sphinx-rtd-theme==2.0.0",
-    "werkzeug==3.1.6",
-    "django-livereload-server==0.4",
+    "werkzeug==3.1.9",
+    "django-livereload-server==0.5.1",
 ]
 
 [tool.black]
