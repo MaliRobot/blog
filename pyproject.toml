@@ -150,6 +150,7 @@ skip_covered = false
 DJANGO_SETTINGS_MODULE = "config.settings.testing"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 addopts = [
+    "--ds=config.settings.testing",
     "--strict-markers",
     "--tb=short",
     "--no-migrations",
