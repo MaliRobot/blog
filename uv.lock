@@ -69,19 +69,6 @@ wheels = [
 ]
 
 [[package]]
-name = "beautifulsoup4"
-version = "4.15.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "soupsieve" },
-    { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/43/65/318323f98dbee45d42dff61d8f047181bc6f2268a9068cfad035a46be5af/beautifulsoup4-4.15.0.tar.gz", hash = "sha256:288e3ca7d54b06f2ac191970bc275c1939cb46d450b255bf6718b04aa37ab4f7", size = 632571, upload-time = "2026-06-07T16:44:20.453Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/88/c6/92fcd42f1ba33e1184263f25bfabf3d27c383410470f169e4b8163bf9c17/beautifulsoup4-4.15.0-py3-none-any.whl", hash = "sha256:d6f88de62e1d4e38ecb1077eb9724cd0eff29d2a08ca16a401e9b9e93f117cf9", size = 109924, upload-time = "2026-06-07T16:44:21.566Z" },
-]
-
-[[package]]
 name = "billiard"
 version = "4.2.4"
 source = { registry = "https://pypi.org/simple" }
@@ -205,7 +192,6 @@ dev = [
     { name = "pytest-django" },
     { name = "sphinx" },
     { name = "sphinx-rtd-theme" },
-    { name = "tornado" },
     { name = "virtualenv" },
     { name = "werkzeug" },
 ]
@@ -276,7 +262,7 @@ requires-dist = [
 dev = [
     { name = "black", specifier = "==26.10.1" },
     { name = "django-debug-toolbar", specifier = "==4.3.0" },
-    { name = "django-livereload-server", specifier = "==0.4" },
+    { name = "django-livereload-server", specifier = "==0.5.1" },
     { name = "factory-boy", specifier = "==3.3.0" },
     { name = "faker", specifier = "==20.1.0" },
     { name = "flake8", specifier = "==6.1.0" },
@@ -290,7 +276,6 @@ dev = [
     { name = "pytest-django", specifier = "==4.7.0" },
     { name = "sphinx", specifier = "==7.2.6" },
     { name = "sphinx-rtd-theme", specifier = "==2.0.0" },
-    { name = "tornado", specifier = "==6.6.1" },
     { name = "virtualenv", specifier = "==21.14.9" },
     { name = "werkzeug", specifier = "==3.1.9" },
 ]
@@ -931,17 +916,15 @@ wheels = [
 
 [[package]]
 name = "django-livereload-server"
-version = "0.4"
+version = "0.5.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "beautifulsoup4" },
     { name = "django" },
-    { name = "six" },
     { name = "tornado" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/59/515d6a32b9d7339ec6cfd523b2c3c93269ced1bcbbba952189d3e0bbd610/django-livereload-server-0.4.tar.gz", hash = "sha256:60ed030085ca53671d25704b10ec7aa3cc94a16da437b727a8dcce42471b4c65", size = 19656, upload-time = "2021-12-14T08:46:08.18Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/79/56/313c43b871d4cc167260faf2924a72ffa9105cdd78faf028341338115800/django-livereload-server-0.5.1.tar.gz", hash = "sha256:e1fecca2a74ec87235bbfdf8b63365499324d9a87017427e5d297711d1cd532d", size = 23111, upload-time = "2023-12-19T23:22:02.289Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/82/cb0a2d9a6821fb0ea45c2dd6676d9c6749aa5b8463332a2667dd64c3189a/django_livereload_server-0.4-py2.py3-none-any.whl", hash = "sha256:136c231e7ad3ba7a4db65426632dfa9b964ac04e8fa5f3808166447f016a4a91", size = 22275, upload-time = "2021-12-14T08:46:06.673Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/cd/77566526193cb49e805bd33a6b982ba5a39f3a7f828dd6647a76bf977f3c/django_livereload_server-0.5.1-py2.py3-none-any.whl", hash = "sha256:e03bd65d1679ef1b4a5e22e2a77d11d3cfb0e3d21ae25afba49e280924ba6f58", size = 25920, upload-time = "2023-12-19T23:22:00.494Z" },
 ]
 
 [[package]]
@@ -2083,15 +2066,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/43/f8/0a71edf031f03c40db17503cb8ca78a69a171254e568e7db241b0ab57ea1/snowballstemmer-3.1.1.tar.gz", hash = "sha256:e07bbc54a0d798fe6010a12398422e62a8bfbba95c394fd0956ef58cb4d3e260", size = 123314, upload-time = "2026-06-03T00:56:40.194Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4c/07/2ebca9b11fb9be7340a818d8d6f63feaebb146be2c4afbd6061701d6df6e/snowballstemmer-3.1.1-py3-none-any.whl", hash = "sha256:7e207fa178741da09cdee59d3ecec3827ad5f92b1fc5c9ff3755b639f71f5752", size = 104164, upload-time = "2026-06-03T00:56:38.614Z" },
-]
-
-[[package]]
-name = "soupsieve"
-version = "2.9.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/69/99/a6ca3beb3ccacb41fb3321d8a60e5566f9e6467601ef8eba6a17e1b89778/soupsieve-2.9.2.tar.gz", hash = "sha256:4a55d8cf158a9c2e587fa4922f1bbb91d68ac829e2d6f25403a85747c71daf74", size = 122445, upload-time = "2026-08-07T00:57:24.801Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/eb/dc/ad025c1ee131eba60c69f4dd5779b18fcf1e6b21a343e2162a84d5d133c7/soupsieve-2.9.2-py3-none-any.whl", hash = "sha256:8089a26fd974ca7a1f30276d3d8492ab266ab15af581642dfe8aa162e0c1c823", size = 37370, upload-time = "2026-08-07T00:57:23.524Z" },
 ]
 
 [[package]]
